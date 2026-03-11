@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --background: #020617; /* slate-950 */
+  --foreground: #f8fafc; /* slate-50 */
+  --accent-blue: #3b82f6; /* blue-500 */
+  --accent-cyan: #06b6d4; /* cyan-500 */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-outfit: var(--font-outfit), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: #cbd5e1; /* slate-300 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    overflow-x: hidden;
+    cursor: none; /* Hide default cursor for custom cursor */
+  }
+
+  /* Make headings use Outfit */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit);
+  }
+  
+  /* Fallback for links if we want them to show pointer when custom cursor is off */
+  a, button, [role="button"] {
+    cursor: none;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+  }
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+  }
+}
+
+/* Background Animated Orbs */
+.bg-gradient-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -20;
+  background: radial-gradient(circle at 0% 0%, #020617 0%, #020617 100%);
+  overflow: hidden;
+}
+
+.orb-1 {
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+  top: -10vw;
+  right: -10vw;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.2;
+}
+
+.orb-2 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+  bottom: -15vw;
+  left: -15vw;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.2;
+}
+
+.orb-3 {
+  width: 30vw;
+  height: 30vw;
+  background: radial-gradient(circle, #1e3a8a 0%, transparent 70%);
+  top: 40vh;
+  right: 15vw;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.2;
+}
+
+.bg-glow-orb {
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
