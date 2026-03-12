@@ -36,7 +36,7 @@ const TypewriterText = ({ texts }: { texts: string[] }) => {
   return <span>{displayText}<span className="animate-pulse">|</span></span>;
 };
 
-const Hero = () => {
+const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20 pb-12 overflow-hidden">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
@@ -77,8 +77,6 @@ const Hero = () => {
             </h2>
           </div>
 
-
-
           <div className="flex items-center space-x-2 text-slate-400">
             <MapPin size={18} className="text-cyan-400" />
             <span className="text-sm font-medium tracking-wide">Tizi Ouzou, Algeria</span>
@@ -86,15 +84,15 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-4 pt-4">
             <MagneticButton>
-              <a
-                href="mailto:berbersoft@gmail.com"
-                className="group relative px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-wider uppercase text-sm rounded-xl transition-all shadow-[0_0_40px_rgba(59,130,246,0.3)] hover:shadow-[0_0_60px_rgba(59,130,246,0.5)] flex items-center space-x-3 overflow-hidden"
+              <button
+                onClick={onOpenContact}
+                className="group relative px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-wider uppercase text-sm rounded-xl transition-all shadow-[0_0_40px_rgba(59,130,246,0.3)] hover:shadow-[0_0_60px_rgba(59,130,246,0.5)] flex items-center space-x-3 overflow-hidden cursor-none"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
                 <Mail size={18} />
                 <span>Contact me</span>
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </a>
+              </button>
             </MagneticButton>
             
             <div className="flex gap-2">
@@ -103,7 +101,7 @@ const Hero = () => {
                   href="/cvFR (3).pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-bold tracking-wider uppercase text-xs rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all flex items-center space-x-2 backdrop-blur-md"
+                  className="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-bold tracking-wider uppercase text-xs rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all flex items-center space-x-2 backdrop-blur-md cursor-none"
                 >
                   <Download size={14} />
                   <span>CV (FR)</span>
@@ -115,7 +113,7 @@ const Hero = () => {
                   href="/cv (Anglais) (1).pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-bold tracking-wider uppercase text-xs rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all flex items-center space-x-2 backdrop-blur-md"
+                  className="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-bold tracking-wider uppercase text-xs rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all flex items-center space-x-2 backdrop-blur-md cursor-none"
                 >
                   <Download size={14} />
                   <span>CV (EN)</span>
@@ -138,7 +136,7 @@ const Hero = () => {
             perspective={1000}
             transitionSpeed={1500}
             gyroscope={true}
-            className="w-full max-w-md cursor-pointer"
+            className="w-full max-w-md cursor-none"
           >
             <div className="relative group">
               {/* Card Background Blur */}

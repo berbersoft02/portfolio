@@ -12,14 +12,19 @@ import SmoothScroll from '@/components/SmoothScroll';
 import CustomCursor from '@/components/CustomCursor';
 import ParticleBackground from '@/components/ParticleBackground';
 import ScrollProgress from '@/components/ScrollProgress';
+import ContactModal from '@/components/ContactModal';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 export default function Home() {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 selection:text-blue-200">
       <div className="bg-noise"></div>
       <ScrollProgress />
       <SmoothScroll />
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
       {/* Background Layer with Parallax Orbs */}
       <div className="bg-gradient-mesh">
         <ParticleBackground />
@@ -63,12 +68,12 @@ export default function Home() {
 
       {/* Global Interactive Elements */}
       <CustomCursor />
-      <Navbar />
+      <Navbar onOpenContact={() => setIsContactOpen(true)} />
       <MouseGlow />
 
       {/* Main Content Sections */}
       <div className="relative z-0">
-        <Hero />
+        <Hero onOpenContact={() => setIsContactOpen(true)} />
         <AboutSection />
         <ProjectsSection />
         <SkillsSection />

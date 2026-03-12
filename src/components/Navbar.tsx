@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = () => {
+const Navbar = ({ onOpenContact }: { onOpenContact: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,6 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -30,7 +29,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <a href="#" className="group flex items-center space-x-3">
+        <a href="#" className="group flex items-center space-x-3 cursor-none">
           <div className="relative w-10 h-10 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl rotate-6 group-hover:rotate-0 transition-transform duration-300 shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
             <div className="relative bg-slate-950 w-full h-full rounded-xl flex items-center justify-center border border-white/10">
@@ -48,17 +47,23 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-bold uppercase tracking-widest text-slate-400 hover:text-blue-400 transition-colors"
+              className="text-sm font-bold uppercase tracking-widest text-slate-400 hover:text-blue-400 transition-colors cursor-none"
             >
               {link.name}
             </a>
           ))}
-          <a
-            href="mailto:berbersoft@gmail.com"
-            className="hidden md:block px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-widest rounded-full transition-all"
+          <button
+            onClick={onOpenContact}
+            className="text-sm font-bold uppercase tracking-widest text-slate-400 hover:text-blue-400 transition-colors cursor-none"
+          >
+            Contact
+          </button>
+          <button
+            onClick={onOpenContact}
+            className="hidden md:block px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-widest rounded-full transition-all cursor-none"
           >
             Hire Me
-          </a>
+          </button>
         </div>
       </div>
     </motion.nav>
