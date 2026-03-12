@@ -45,7 +45,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           "App & Web Developer",
           "Professional Creative Editor"
         ],
-        tagline: "Bridging hardware and software through real-time vision, IoT systems, and intelligent control—currently pursuing advanced Master’s programs in France.",
+        tagline: "Bridging hardware and software through real-time vision, IoT systems, and intelligent control. Currently pursuing advanced Master’s programs in France.",
         contact: 'Contact me',
         cvFr: 'CV (FR)',
         cvEn: 'CV (EN)',
@@ -58,12 +58,12 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         badge: 'Journey',
         title: 'About Me',
         bio: "I'm an embedded systems engineer from Algeria with a Master’s degree in Integrated Electronic Systems. I build apps and websites, and enjoy building systems that combine microcontrollers, sensors, control and AI and I complement my technical expertise with creative skills in image and video editing to deliver complete, polished solutions.",
-        academic: "I’m currently applying to M2 Embedded Systems & AI programs in France, and I’m open to collaborations on ambitious, hands-on projects that bridge the gap between academia and industry.",
+        academic: "I’m currently applying to Master Embedded Systems & AI programs in France, and I’m open to collaborations on ambitious, hands-on projects that bridge the gap between academia and industry.",
         stats: {
           edu: 'Education',
           focus: 'Focus',
           loc: 'Location',
-          master: "Master's",
+          master: "Master",
           real: 'Real-world',
           dz: 'Algeria'
         }
@@ -133,7 +133,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           "Développeur Web & Mobile",
           "Monteur & Créatif Multimédia"
         ],
-        tagline: "Faire le pont entre le matériel et le logiciel via la vision en temps réel, l'IoT et le contrôle intelligent—actuellement en recherche d'un Master 2 en France.",
+        tagline: "Faire le pont entre le matériel et le logiciel via la vision en temps réel, l'IoT et le contrôle intelligent. Actuellement en recherche d'un Master en France.",
         contact: 'Me contacter',
         cvFr: 'CV (FR)',
         cvEn: 'CV (EN)',
@@ -145,13 +145,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       about: {
         badge: 'Parcours',
         title: 'À Propos de Moi',
-        bio: "Je suis un ingénieur en systèmes embarqués originaire d'Algérie, titulaire d'un Master en Systèmes Électroniques Intégrés. Je développe des applications et des sites web, et j'aime concevoir des systèmes combinant microcontrôleurs, capteurs et IA. Je complète mon expertise technique par des compétences créatives en édition image et vidéo pour livrer des solutions complètes et soignées.",
-        academic: "Je postule actuellement à des programmes de Master 2 en Systèmes Embarqués & IA en France, et je suis ouvert à des collaborations sur des projets ambitieux faisant le lien entre le monde académique et l'industrie.",
+        bio: "Je suis un ingénieur en systèmes embarqués originaire d'Algérie, titulaire d'un Master en Systèmes Électroniques Intégrés. Je développe des applications et des sites web, et j'aime concevoir des systèmes combinant microcontrôleurs, capteurs et IA et je complète mon expertise technique par des compétences créatives en édition image et vidéo pour livrer des solutions complètes et soignées.",
+        academic: "Je postule actuellement à des programmes de Master en Systèmes Embarqués & IA en France, et je suis ouvert à des collaborations sur des projets ambitieux faisant le lien entre le monde académique et l'industrie.",
         stats: {
           edu: 'Formation',
           focus: 'Approche',
           loc: 'Localisation',
-          master: 'Master 2',
+          master: 'Master',
           real: 'Pratique',
           dz: 'Algérie'
         }
@@ -167,7 +167,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           },
           {
             title: "Station Météo IoT (ESP32)",
-            summary: "Station météo autonome utilisant ESP32 et DHT22, servant une interface web responsive directement depuis le microcontrôleur pour visualiser les données en temps réel via Wi-Fi.",
+            summary: "Station météo autonome utilisant ESP32 and DHT22, servant une interface web responsive directement depuis le microcontrôleur pour visualiser les données en temps réel via Wi-Fi.",
             impact: "Solution IoT full-stack avec dashboard web live"
           },
           {
