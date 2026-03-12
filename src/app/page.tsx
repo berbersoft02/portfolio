@@ -82,7 +82,7 @@ export default function Home() {
         {/* Simple Footer */}
         <footer className="py-12 px-6 text-center border-t border-slate-900 bg-slate-950/80 backdrop-blur-sm">
           <p className="text-slate-600 text-sm tracking-widest font-bold uppercase">
-            © 2026 Said Ahrikenchikh
+            © 2026 Said Ahrikenchikh. All rights reserved.
           </p>
         </footer>
       </div>

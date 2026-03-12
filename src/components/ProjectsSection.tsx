@@ -9,18 +9,21 @@ const projects = [
     title: "Real-time Sign Language Translator",
     tech: ["Android", "Kotlin", "Java", "Deep Learning", "Computer Vision"],
     summary: "Android app that captures sign language gestures through the camera and translates them into text and speech using a custom deep learning model trained on a dataset I collected and labeled myself.",
+    impact: "Trained custom model on 2k+ labeled gesture images",
     index: "01"
   },
   {
     title: "IoT Weather Station (ESP32)",
     tech: ["ESP32", "DHT22", "IoT", "HTML", "CSS"],
     summary: "Autonomous weather station using ESP32 and DHT22, serving a responsive web interface directly from the microcontroller for real-time environmental data visualization over Wi‑Fi.",
+    impact: "Full-stack IoT solution with live web dashboard",
     index: "02"
   },
   {
     title: "DC Motor Speed Control with Feedback",
     tech: ["Arduino", "PWM", "Control", "Sensors", "C++"],
     summary: "Closed-loop DC motor speed control system using PWM and a speed sensor on Arduino, maintaining constant speed under varying loads and illustrating the full chain from sensors to control to actuator.",
+    impact: "Achieved ±5% speed accuracy under varying loads",
     index: "03"
   }
 ];

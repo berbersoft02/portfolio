@@ -7,11 +7,12 @@ import { motion } from 'framer-motion';
 interface ProjectCardProps {
   title: string;
   summary: string;
+  impact?: string;
   tech: string[];
   index: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, summary, tech, index }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ title, summary, impact, tech, index }) => {
   return (
     <Tilt
       tiltMaxAngleX={10}
@@ -43,9 +44,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, summary, tech, index }
           <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-300 transition-all duration-300">
             {title}
           </h3>
-          <p className="text-slate-400 text-sm leading-relaxed mb-6 font-light">
+          <p className="text-slate-400 text-sm leading-relaxed mb-4 font-light">
             {summary}
           </p>
+          {impact && (
+            <p className="text-cyan-400/90 text-xs font-medium mb-6 flex items-center italic">
+              <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full mr-2 shadow-[0_0_8px_rgba(6,182,212,0.5)]" />
+              {impact}
+            </p>
+          )}
         </div>
 
         <div className="relative z-10 flex flex-wrap gap-2 mt-auto">

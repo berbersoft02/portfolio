@@ -40,8 +40,8 @@ const AboutSection = () => {
               “I'm an embedded systems engineer from Algeria with a Master’s degree in Integrated Electronic Systems. I build apps and websites, and enjoy building systems that combine microcontrollers, sensors, control and AI and I complement my technical expertise with creative skills in image and video editing to deliver complete, polished solutions.”
             </p>
             
-            <p className="mt-8 text-slate-400 text-lg leading-relaxed relative z-10 font-light">
-              I’m currently applying to Master’s programs in embedded systems and AI, and I’m open to collaborations on ambitious, hands-on projects.
+            <p className="mt-8 text-slate-400 text-lg leading-relaxed relative z-10 font-light text-left">
+              I’m currently applying to <strong className="text-blue-300 font-medium text-lg">M2 Embedded Systems & AI programs in France</strong>, and I’m open to collaborations on ambitious, hands-on projects that bridge the gap between academia and industry.
             </p>
 
             <div className="mt-12 flex justify-center flex-wrap gap-8 md:gap-16 relative z-10">

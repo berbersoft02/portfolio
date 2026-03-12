@@ -28,6 +28,13 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
       label: 'Professional Profile'
     },
     {
+      name: 'GitHub',
+      icon: <Github size={20} />,
+      url: '#',
+      color: 'hover:text-white',
+      label: 'Coming Soon'
+    },
+    {
       name: 'Instagram',
       icon: <Instagram size={20} />,
       url: 'https://www.instagram.com/said_ahriken/',

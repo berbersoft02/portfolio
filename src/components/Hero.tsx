@@ -75,9 +75,15 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
                 "Professional Creative Editor"
               ]} />
             </h2>
-          </div>
+            </div>
 
-          <div className="flex items-center space-x-2 text-slate-400">
+            <p className="max-w-xl text-slate-400 text-lg leading-relaxed font-light border-l-2 border-blue-500/30 pl-4">
+            Bridging hardware and software through <strong className="text-blue-300 font-medium">real-time vision</strong>, 
+            <strong className="text-blue-300 font-medium"> IoT systems</strong>, and <strong className="text-blue-300 font-medium">intelligent control</strong>—currently pursuing 
+            advanced Master’s programs in <strong className="text-cyan-400 font-medium">France</strong>.
+            </p>
+
+            <div className="flex items-center space-x-2 text-slate-400">
             <MapPin size={18} className="text-cyan-400" />
             <span className="text-sm font-medium tracking-wide">Tizi Ouzou, Algeria</span>
           </div>

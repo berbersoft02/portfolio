@@ -44,6 +44,7 @@ const SkillsSection = () => {
         >
           <span className="text-blue-500 font-bold tracking-[0.2em] uppercase text-xs">Expertise</span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-2">Skills & Expertise</h2>
+          <p className="text-slate-500 text-sm mt-4 font-medium tracking-wide uppercase italic">Master’s-level projects in embedded systems and AI</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
