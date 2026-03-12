@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Linkedin, Instagram, X, ExternalLink, MapPin, Copy, Check } from 'lucide-react';
+import { Mail, Linkedin, Instagram, X, ExternalLink, MapPin, Copy, Check, Github } from 'lucide-react';
 import { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface ContactModalProps {
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
 
   const copyEmail = () => {
     navigator.clipboard.writeText('berbersoft@gmail.com');
@@ -21,25 +23,25 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
   const socialLinks = [
     {
-      name: 'LinkedIn',
+      name: t('contact.linked'),
       icon: <Linkedin size={20} />,
       url: 'https://www.linkedin.com/in/said-ahrikenchikh-366a03259/',
       color: 'hover:text-blue-400',
-      label: 'Professional Profile'
+      label: t('contact.pro')
     },
     {
-      name: 'GitHub',
+      name: t('contact.github'),
       icon: <Github size={20} />,
       url: '#',
       color: 'hover:text-white',
-      label: 'Coming Soon'
+      label: t('contact.soon')
     },
     {
-      name: 'Instagram',
+      name: t('contact.insta'),
       icon: <Instagram size={20} />,
       url: 'https://www.instagram.com/said_ahriken/',
       color: 'hover:text-pink-500',
-      label: 'Creative Work'
+      label: t('contact.creative')
     }
   ];
 
@@ -74,8 +76,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
               <div className="p-8 md:p-12">
                 <div className="mb-8">
-                  <h3 className="text-3xl font-bold text-white mb-2">Get in Touch</h3>
-                  <p className="text-slate-400 font-light">Open for collaborations and new opportunities.</p>
+                  <h3 className="text-3xl font-bold text-white mb-2">{t('contact.title')}</h3>
+                  <p className="text-slate-400 font-light">{t('contact.desc')}</p>
                 </div>
 
                 <div className="space-y-6">
@@ -88,36 +90,40 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                           <Mail size={24} />
                         </div>
                         <div>
-                          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Email</p>
+                          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{t('contact.email')}</p>
                           <p className="text-white font-medium">berbersoft@gmail.com</p>
                         </div>
                       </div>
                       <button 
                         onClick={copyEmail}
-                        className="p-2 text-slate-500 hover:text-cyan-400 transition-colors"
+                        className="p-2 text-slate-500 hover:text-cyan-400 transition-colors flex items-center"
                         title="Copy to clipboard"
                       >
-                        {copied ? <Check size={18} className="text-emerald-400" /> : <Copy size={18} />}
+                        {copied ? (
+                          <span className="flex items-center text-emerald-400 text-xs font-bold mr-2 uppercase tracking-tighter">
+                            <Check size={14} className="mr-1" /> {t('contact.copied')}
+                          </span>
+                        ) : <Copy size={18} />}
                       </button>
                     </div>
                   </div>
 
                   {/* Social Links */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {socialLinks.map((link) => (
                       <a
                         key={link.name}
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex flex-col p-5 bg-slate-950/30 border border-white/5 rounded-2xl hover:border-white/10 hover:bg-white/5 transition-all duration-300"
+                        className="group flex flex-col p-5 bg-slate-950/30 border border-white/5 rounded-2xl hover:border-white/10 hover:bg-white/5 transition-all duration-300 relative"
                       >
                         <div className={`mb-3 text-slate-400 transition-colors duration-300 ${link.color}`}>
                           {link.icon}
                         </div>
-                        <span className="text-white font-bold text-sm">{link.name}</span>
-                        <span className="text-[10px] text-slate-500 mt-1">{link.label}</span>
-                        <ExternalLink size={12} className="absolute top-4 right-4 opacity-0 group-hover:opacity-30 transition-opacity" />
+                        <span className="text-white font-bold text-xs">{link.name}</span>
+                        <span className="text-[9px] text-slate-500 mt-1 leading-tight">{link.label}</span>
+                        <ExternalLink size={10} className="absolute top-3 right-3 opacity-0 group-hover:opacity-30 transition-opacity" />
                       </a>
                     ))}
                   </div>
@@ -125,7 +131,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                   {/* Location Info */}
                   <div className="flex items-center space-x-3 px-2 pt-4 text-slate-500">
                     <MapPin size={16} />
-                    <span className="text-xs font-medium uppercase tracking-widest">Tizi Ouzou, Algeria</span>
+                    <span className="text-xs font-medium uppercase tracking-widest">{t('contact.loc')}: Tizi Ouzou, Algeria</span>
                   </div>
                 </div>
               </div>

@@ -13,11 +13,13 @@ import CustomCursor from '@/components/CustomCursor';
 import ParticleBackground from '@/components/ParticleBackground';
 import ScrollProgress from '@/components/ScrollProgress';
 import ContactModal from '@/components/ContactModal';
+import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <main className="relative min-h-screen selection:bg-blue-500/30 selection:text-blue-200">
@@ -82,7 +84,7 @@ export default function Home() {
         {/* Simple Footer */}
         <footer className="py-12 px-6 text-center border-t border-slate-900 bg-slate-950/80 backdrop-blur-sm">
           <p className="text-slate-600 text-sm tracking-widest font-bold uppercase">
-            © 2026 Said Ahrikenchikh. All rights reserved.
+            {t('footer')}
           </p>
         </footer>
       </div>

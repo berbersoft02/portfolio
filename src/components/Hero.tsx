@@ -5,6 +5,7 @@ import Tilt from 'react-parallax-tilt';
 import { motion } from 'framer-motion';
 import { MapPin, Mail, Download, ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
+import { useLanguage } from '@/context/LanguageContext';
 
 const TypewriterText = ({ texts }: { texts: string[] }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -37,6 +38,8 @@ const TypewriterText = ({ texts }: { texts: string[] }) => {
 };
 
 const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
+  const { t, language } = useLanguage();
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20 pb-12 overflow-hidden">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
@@ -57,7 +60,7 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className="text-emerald-300 text-xs font-bold tracking-[0.2em] uppercase">Available for work</span>
+            <span className="text-emerald-300 text-xs font-bold tracking-[0.2em] uppercase">{t('hero.available')}</span>
           </motion.div>
 
           <div className="space-y-4">
@@ -68,22 +71,15 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl font-light text-cyan-100/80 tracking-wide h-[40px]">
-              <TypewriterText texts={[
-                "Embedded Systems Engineer",
-                "AI & Deep Learning Specialist",
-                "App & Web Developer",
-                "Professional Creative Editor"
-              ]} />
+              <TypewriterText key={language} texts={t('hero.roles')} />
             </h2>
-            </div>
+          </div>
 
-            <p className="max-w-xl text-slate-400 text-lg leading-relaxed font-light border-l-2 border-blue-500/30 pl-4">
-            Bridging hardware and software through <strong className="text-blue-300 font-medium">real-time vision</strong>, 
-            <strong className="text-blue-300 font-medium"> IoT systems</strong>, and <strong className="text-blue-300 font-medium">intelligent control</strong>—currently pursuing 
-            advanced Master’s programs in <strong className="text-cyan-400 font-medium">France</strong>.
-            </p>
+          <p className="max-w-xl text-slate-400 text-lg leading-relaxed font-light border-l-2 border-blue-500/30 pl-4">
+            {t('hero.tagline')}
+          </p>
 
-            <div className="flex items-center space-x-2 text-slate-400">
+          <div className="flex items-center space-x-2 text-slate-400">
             <MapPin size={18} className="text-cyan-400" />
             <span className="text-sm font-medium tracking-wide">Tizi Ouzou, Algeria</span>
           </div>
@@ -96,7 +92,7 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
                 <Mail size={18} />
-                <span>Contact me</span>
+                <span>{t('hero.contact')}</span>
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </MagneticButton>
@@ -110,7 +106,7 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
                   className="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-bold tracking-wider uppercase text-xs rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all flex items-center space-x-2 backdrop-blur-md cursor-none"
                 >
                   <Download size={14} />
-                  <span>CV (FR)</span>
+                  <span>{t('hero.cvFr')}</span>
                 </a>
               </MagneticButton>
               
@@ -122,7 +118,7 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
                   className="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-bold tracking-wider uppercase text-xs rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all flex items-center space-x-2 backdrop-blur-md cursor-none"
                 >
                   <Download size={14} />
-                  <span>CV (EN)</span>
+                  <span>{t('hero.cvEn')}</span>
                 </a>
               </MagneticButton>
             </div>
@@ -156,7 +152,7 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
                   <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" />
                   
                   <div>
-                    <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">Embedded Systems · AI</h3>
+                    <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">{t('hero.cardTitle')}</h3>
                     <div className="flex flex-wrap gap-2">
                       {['ESP32', 'Arduino', 'Python', 'Next.js', 'Java', 'MATLAB', 'Deep Learning', 'Photoshop', 'After Effects', 'Proteus', 'Apps & Websites', 'Others...'].map((tech) => (
                         <span key={tech} className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 bg-slate-800 text-cyan-400 rounded-md border border-slate-700/50">
@@ -168,8 +164,8 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
 
                   <div className="pt-8 flex justify-between items-end">
                     <div className="space-y-1">
-                      <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Project Focus</p>
-                      <p className="text-slate-300 text-sm font-medium">Real-time Vision & IoT</p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">{t('hero.projectFocus')}</p>
+                      <p className="text-slate-300 text-sm font-medium">{t('hero.visionIot')}</p>
                     </div>
                     <div className="w-10 h-10 rounded-full border border-blue-500/30 flex items-center justify-center">
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />

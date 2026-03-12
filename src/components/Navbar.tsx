@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = ({ onOpenContact }: { onOpenContact: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,9 +18,9 @@ const Navbar = ({ onOpenContact }: { onOpenContact: () => void }) => {
   }, []);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.skills'), href: '#skills' },
   ];
 
   return (
@@ -43,27 +46,33 @@ const Navbar = ({ onOpenContact }: { onOpenContact: () => void }) => {
         </a>
 
         <div className="flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
+          <div className="hidden lg:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-bold uppercase tracking-widest text-slate-400 hover:text-blue-400 transition-colors cursor-none"
+              >
+                {link.name}
+              </a>
+            ))}
+            <button
+              onClick={onOpenContact}
               className="text-sm font-bold uppercase tracking-widest text-slate-400 hover:text-blue-400 transition-colors cursor-none"
             >
-              {link.name}
-            </a>
-          ))}
-          <button
-            onClick={onOpenContact}
-            className="text-sm font-bold uppercase tracking-widest text-slate-400 hover:text-blue-400 transition-colors cursor-none"
-          >
-            Contact
-          </button>
-          <button
-            onClick={onOpenContact}
-            className="hidden md:block px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-widest rounded-full transition-all cursor-none"
-          >
-            Hire Me
-          </button>
+              {t('nav.contact')}
+            </button>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
+            <button
+              onClick={onOpenContact}
+              className="hidden md:block px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-widest rounded-full transition-all cursor-none"
+            >
+              {t('nav.hire')}
+            </button>
+          </div>
         </div>
       </div>
     </motion.nav>
