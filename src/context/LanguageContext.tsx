@@ -45,7 +45,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           "App & Web Developer",
           "Professional Creative Editor"
         ],
-        tagline: "Bridging hardware and software through real-time vision, IoT systems, and intelligent control. Currently pursuing advanced Master’s programs in France.",
+        tagline: "Bridging hardware and software through real-time vision, IoT systems, and intelligent control.",
         contact: 'Contact me',
         cvFr: 'CV (FR)',
         cvEn: 'CV (EN)',
@@ -133,7 +133,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           "Développeur Web & Mobile",
           "Monteur & Créatif Multimédia"
         ],
-        tagline: "Faire le pont entre le matériel et le logiciel via la vision en temps réel, l'IoT et le contrôle intelligent. Actuellement en recherche d'un Master en France.",
+        tagline: "Faire le pont entre le matériel et le logiciel via la vision en temps réel, l'IoT et le contrôle intelligent.",
         contact: 'Me contacter',
         cvFr: 'CV (FR)',
         cvEn: 'CV (EN)',
