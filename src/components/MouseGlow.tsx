@@ -24,7 +24,7 @@ const MouseGlow = () => {
 
   return (
     <motion.div
-      className="fixed inset-0 pointer-events-none z-30 opacity-40"
+      className="fixed inset-0 pointer-events-none z-30 opacity-40 no-print"
       style={{
         background: `radial-gradient(600px circle at var(--x) var(--y), rgba(59, 130, 246, 0.15), transparent 80%)`,
       } as any}

@@ -112,3 +112,95 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
+
+/* Print Optimization */
+@media print {
+  /* Hide interactive/background/fixed elements */
+  nav, 
+  footer,
+  button,
+  .no-print,
+  .custom-cursor,
+  .particle-background,
+  .mouse-glow,
+  .scroll-progress,
+  .bg-noise,
+  .bg-gradient-mesh,
+  .orb-1, .orb-2, .orb-3,
+  [class*="fixed"],
+  [class*="absolute"] {
+    display: none !important;
+  }
+
+  /* Reset layout for paper */
+  html, body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    overflow: visible !important;
+    cursor: auto !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  section {
+    page-break-inside: avoid;
+    padding: 1rem 0 !important;
+    margin: 1rem 0 !important;
+    border: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Ensure text is readable */
+  h1, h2, h3, h4, h5, h6, p, span, li {
+    color: black !important;
+    text-shadow: none !important;
+  }
+
+  a {
+    color: #2563eb !important; /* blue-600 */
+    text-decoration: underline;
+  }
+
+  /* Show URLs after links in print */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+
+  /* Ensure the main content is visible and properly spaced */
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 1cm !important;
+  }
+
+  /* Override Framer Motion initial/animate states that might hide content */
+  div[style*="opacity: 0"], 
+  div[style*="opacity: 0"] *,
+  [class*="opacity-0"] {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  /* Specific section overrides */
+  .grid {
+    display: block !important;
+  }
+  
+  .grid > * {
+    margin-bottom: 1.5rem;
+    page-break-inside: avoid;
+  }
+}

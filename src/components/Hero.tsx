@@ -84,7 +84,7 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
             <span className="text-sm font-medium tracking-wide">Tizi Ouzou, Algeria</span>
           </div>
 
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex flex-wrap gap-4 pt-4 no-print">
             <MagneticButton>
               <button
                 onClick={onOpenContact}
