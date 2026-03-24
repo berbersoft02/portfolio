@@ -11,6 +11,7 @@ import MouseGlow from '@/components/MouseGlow';
 import SmoothScroll from '@/components/SmoothScroll';
 import CustomCursor from '@/components/CustomCursor';
 import ParticleBackground from '@/components/ParticleBackground';
+import OrbitingSkills from '@/components/ui/orbiting-skills';
 import ScrollProgress from '@/components/ScrollProgress';
 import ContactModal from '@/components/ContactModal';
 import { useLanguage } from '@/context/LanguageContext';
@@ -27,9 +28,15 @@ export default function Home() {
       <ScrollProgress />
       <SmoothScroll />
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
-      {/* Background Layer with Parallax Orbs */}
+      {/* Background Layer with Parallax Orbs and Orbiting Skills */}
       <div className="bg-gradient-mesh">
         <ParticleBackground />
+        
+        {/* Orbiting Skills Background Animation */}
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[800px] max-h-[800px] opacity-30 pointer-events-none z-0">
+          <OrbitingSkills />
+        </div>
+
         <motion.div 
           animate={{
             x: [0, 20, 0],
