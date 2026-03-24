@@ -28,10 +28,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-slate-950 text-slate-300`}
       >
-        {/* LAYOUT DEBUG BANNER - ABSOLUTELY ON TOP */}
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '50px', backgroundColor: 'purple', color: 'white', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
-          LAYOUT DEBUG: IF YOU SEE THIS, THE SITE IS LIVE
-        </div>
         <LanguageProvider>
           {children}
         </LanguageProvider>
