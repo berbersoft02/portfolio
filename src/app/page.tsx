@@ -92,7 +92,8 @@ export default function Home() {
       </div>
 
       {/* TESTING: Fixed Front Layer - IF THIS APPEARS, THE COMPONENT IS RENDERING */}
-      <div className="fixed inset-0 flex items-center justify-center z-[9999] pointer-events-none">
+      <div className="fixed inset-0 flex flex-col items-center justify-center z-[9999] pointer-events-none">
+        <div className="bg-red-600 text-white px-4 py-2 rounded-full mb-4 font-bold">DEBUG ACTIVE: IF YOU SEE THIS, LAYER IS WORKING</div>
         <OrbitingSkills />
       </div>
     </main>
