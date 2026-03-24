@@ -141,19 +141,19 @@ OrbitingSkill.displayName = 'OrbitingSkill';
 const GlowingOrbitPath = memo(({ radius, glowColor = 'cyan', animationDelay = 0 }: GlowingOrbitPathProps) => {
   const glowColors = {
     cyan: {
-      primary: 'rgba(6, 182, 212, 0.2)',
-      secondary: 'rgba(6, 182, 212, 0.05)',
-      border: 'rgba(6, 182, 212, 0.1)'
+      primary: 'rgba(6, 182, 212, 0.4)',
+      secondary: 'rgba(6, 182, 212, 0.1)',
+      border: 'rgba(6, 182, 212, 0.2)'
     },
     purple: {
-      primary: 'rgba(147, 51, 234, 0.2)',
-      secondary: 'rgba(147, 51, 234, 0.05)',
-      border: 'rgba(147, 51, 234, 0.1)'
+      primary: 'rgba(147, 51, 234, 0.4)',
+      secondary: 'rgba(147, 51, 234, 0.1)',
+      border: 'rgba(147, 51, 234, 0.2)'
     },
     blue: {
-        primary: 'rgba(59, 130, 246, 0.2)',
-        secondary: 'rgba(59, 130, 246, 0.05)',
-        border: 'rgba(59, 130, 246, 0.1)'
+        primary: 'rgba(59, 130, 246, 0.4)',
+        secondary: 'rgba(59, 130, 246, 0.1)',
+        border: 'rgba(59, 130, 246, 0.2)'
       }
   };
 
@@ -169,11 +169,10 @@ const GlowingOrbitPath = memo(({ radius, glowColor = 'cyan', animationDelay = 0 
     >
       {/* Glowing background */}
       <div
-        className="absolute inset-0 rounded-full"
+        className="absolute inset-0 rounded-full animate-pulse"
         style={{
-          background: `radial-gradient(circle, transparent 70%, ${colors.secondary} 85%, ${colors.primary} 100%)`,
-          boxShadow: `inset 0 0 40px ${colors.secondary}`,
-          animation: 'pulse 6s ease-in-out infinite',
+          background: `radial-gradient(circle, transparent 75%, ${colors.secondary} 90%, ${colors.primary} 100%)`,
+          boxShadow: `inset 0 0 30px ${colors.secondary}`,
           animationDelay: `${animationDelay}s`,
         }}
       />
@@ -220,9 +219,9 @@ export default function OrbitingSkills() {
   ];
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center pointer-events-auto">
+    <div className="relative w-full h-full flex items-center justify-center">
       <div 
-        className="relative w-[600px] h-[600px] flex items-center justify-center scale-75 md:scale-100"
+        className="relative w-[700px] h-[700px] flex items-center justify-center scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
