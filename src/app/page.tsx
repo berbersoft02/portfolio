@@ -70,11 +70,6 @@ export default function Home() {
         />
       </div>
 
-      {/* Orbiting Skills Background Animation - Moved and Opacity Increased */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1000px] max-h-[1000px] opacity-60 pointer-events-none z-[-10]">
-        <OrbitingSkills />
-      </div>
-
       {/* Global Interactive Elements */}
       <CustomCursor />
       <Navbar onOpenContact={() => setIsContactOpen(true)} />

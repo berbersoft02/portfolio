@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Mail, Download, ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 import { useLanguage } from '@/context/LanguageContext';
+import OrbitingSkills from './ui/orbiting-skills';
 
 const TypewriterText = ({ texts }: { texts: string[] }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -42,6 +43,11 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20 pb-12 overflow-hidden">
+      {/* Background Animation - Centered in Hero */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1200px] max-h-[1200px] opacity-40 pointer-events-none z-0">
+        <OrbitingSkills />
+      </div>
+
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
         {/* Left Side: Text Content */}
         <motion.div

@@ -195,6 +195,7 @@ export default function OrbitingSkills() {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    console.log("OrbitingSkills mounted and running");
     if (isPaused) return;
 
     let animationFrameId: number;
@@ -219,18 +220,18 @@ export default function OrbitingSkills() {
   ];
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative w-full h-full flex items-center justify-center border border-dashed border-white/5 pointer-events-none">
       <div 
-        className="relative w-[700px] h-[700px] flex items-center justify-center scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100"
+        className="relative w-[800px] h-[800px] flex items-center justify-center scale-[0.7] sm:scale-80 md:scale-95 lg:scale-105 pointer-events-auto"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
         
-        {/* Central Core */}
-        <div className="w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-950 rounded-full flex items-center justify-center z-10 relative border border-slate-700 shadow-2xl">
-          <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-xl animate-pulse"></div>
-          <div className="relative z-10">
-            <Layout size={28} className="text-cyan-400" />
+        {/* Central Core - High visibility for debugging */}
+        <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center z-50 relative border-2 border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.5)]">
+          <div className="absolute inset-0 rounded-full bg-cyan-500/30 blur-xl animate-pulse"></div>
+          <div className="relative z-10 text-cyan-400">
+            <Layout size={32} strokeWidth={2.5} />
           </div>
         </div>
 
