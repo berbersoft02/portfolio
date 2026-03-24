@@ -195,17 +195,18 @@ export default function OrbitingSkills() {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    console.log("OrbitingSkills mounted and running");
-    if (isPaused) return;
-
+    console.log("OrbitingSkills: Animation Loop Started");
     let animationFrameId: number;
     let lastTime = performance.now();
 
     const animate = (currentTime: number) => {
-      const deltaTime = (currentTime - lastTime) / 1000;
-      lastTime = currentTime;
-
-      setTime(prevTime => prevTime + deltaTime);
+      if (!isPaused) {
+        const deltaTime = (currentTime - lastTime) / 1000;
+        lastTime = currentTime;
+        setTime(prevTime => prevTime + deltaTime);
+      } else {
+        lastTime = currentTime;
+      }
       animationFrameId = requestAnimationFrame(animate);
     };
 
@@ -220,20 +221,37 @@ export default function OrbitingSkills() {
   ];
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center border border-dashed border-white/5 pointer-events-none">
-      <div 
-        className="relative w-[800px] h-[800px] flex items-center justify-center scale-[0.7] sm:scale-80 md:scale-95 lg:scale-105 pointer-events-auto"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        
-        {/* Central Core - High visibility for debugging */}
-        <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center z-50 relative border-2 border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.5)]">
-          <div className="absolute inset-0 rounded-full bg-cyan-500/30 blur-xl animate-pulse"></div>
-          <div className="relative z-10 text-cyan-400">
-            <Layout size={32} strokeWidth={2.5} />
-          </div>
-        </div>
+    <div className="flex items-center justify-center w-[600px] h-[600px] relative">
+      {/* Central Core - Guaranteed Visibility */}
+      <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center z-50 relative border-2 border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.8)]">
+        <div className="absolute inset-0 rounded-full bg-cyan-500/40 blur-xl animate-pulse"></div>
+        <Layout size={32} className="text-cyan-400 relative z-10" />
+      </div>
+
+      {/* Render glowing orbit paths */}
+      {orbitConfigs.map((config) => (
+        <GlowingOrbitPath
+          key={`path-${config.radius}`}
+          radius={config.radius}
+          glowColor={config.glowColor}
+          animationDelay={config.delay}
+        />
+      ))}
+
+      {/* Render orbiting skill icons */}
+      {skillsConfig.map((config) => {
+        const angle = (time * config.speed) + (config.phaseShift || 0);
+        return (
+          <OrbitingSkill
+            key={config.id}
+            config={config}
+            angle={angle}
+          />
+        );
+      })}
+    </div>
+  );
+}
 
         {/* Render glowing orbit paths */}
         {orbitConfigs.map((config) => (
