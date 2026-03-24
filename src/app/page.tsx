@@ -90,6 +90,11 @@ export default function Home() {
           </p>
         </footer>
       </div>
+
+      {/* TESTING: Fixed Front Layer - IF THIS APPEARS, THE COMPONENT IS RENDERING */}
+      <div className="fixed inset-0 flex items-center justify-center z-[9999] pointer-events-none">
+        <OrbitingSkills />
+      </div>
     </main>
   );
 }
