@@ -252,29 +252,3 @@ export default function OrbitingSkills() {
     </div>
   );
 }
-
-        {/* Render glowing orbit paths */}
-        {orbitConfigs.map((config) => (
-          <GlowingOrbitPath
-            key={`path-${config.radius}`}
-            radius={config.radius}
-            glowColor={config.glowColor}
-            animationDelay={config.delay}
-          />
-        ))}
-
-        {/* Render orbiting skill icons */}
-        {skillsConfig.map((config) => {
-          const angle = time * config.speed + (config.phaseShift || 0);
-          return (
-            <OrbitingSkill
-              key={config.id}
-              config={config}
-              angle={angle}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-}
