@@ -44,11 +44,11 @@ const Hero = ({ onOpenContact }: { onOpenContact: () => void }) => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20 pb-12 overflow-hidden">
       {/* Background Animation - Guaranteed Positioning and Visibility */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] flex items-center justify-center opacity-100 pointer-events-none z-10">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center pointer-events-none z-0">
         <OrbitingSkills />
       </div>
 
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-20">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
         {/* Left Side: Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
