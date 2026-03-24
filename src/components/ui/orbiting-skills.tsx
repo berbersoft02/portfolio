@@ -35,17 +35,17 @@ const iconComponents: Record<IconType, { component: React.ElementType; color: st
 const SkillIcon = ({ type, radius, speed, reverse = false, index, total }: { type: IconType; radius: number; speed: number; reverse?: boolean; index: number; total: number }) => {
   const Icon = iconComponents[type].component;
   const initialRotation = (index / total) * 360;
+  const finalRotation = initialRotation + (reverse ? -360 : 360);
 
   return (
     <motion.div
       className="absolute top-1/2 left-1/2"
-      initial={{ rotate: initialRotation }}
-      animate={{ rotate: initialRotation + (reverse ? -360 : 360) }}
+      initial={{ rotate: initialRotation, x: "-50%", y: "-50%" }}
+      animate={{ rotate: finalRotation }}
       transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
       style={{
         width: radius * 2,
         height: radius * 2,
-        transform: 'translate(-50%, -50%)',
       }}
     >
       <div 
@@ -53,9 +53,9 @@ const SkillIcon = ({ type, radius, speed, reverse = false, index, total }: { typ
         style={{ width: 44, height: 44 }}
       >
         <motion.div
-           animate={{ rotate: initialRotation + (reverse ? -360 : 360) }}
+           initial={{ rotate: -initialRotation }}
+           animate={{ rotate: -finalRotation }}
            transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
-           style={{ rotate: -(initialRotation + (reverse ? -360 : 360)) }}
         >
           <Icon size={24} color={iconComponents[type].color} />
         </motion.div>
