@@ -1,5 +1,5 @@
 "use client"
-import React, { memo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   FileCode, Code2, Atom, Server, Wind, 
@@ -12,77 +12,92 @@ type IconType =
   | 'nextjs' | 'typescript' | 'cpp' | 'python' | 'java' | 'git' 
   | 'arduino' | 'ai' | 'photoshop' | 'aftereffects' | 'esp32';
 
-const iconComponents: Record<IconType, { component: React.ElementType; color: string; label: string }> = {
-  html: { component: FileCode, color: '#E34F26', label: 'HTML5' },
-  css: { component: Layers, color: '#1572B6', label: 'CSS3' },
-  javascript: { component: Code2, color: '#F7DF1E', label: 'JavaScript' },
-  react: { component: Atom, color: '#61DAFB', label: 'React' },
-  node: { component: Server, color: '#339933', label: 'Node.js' },
-  tailwind: { component: Wind, color: '#06B6D4', label: 'Tailwind' },
-  nextjs: { component: Layout, color: '#FFFFFF', label: 'Next.js' },
-  typescript: { component: Code2, color: '#3178C6', label: 'TypeScript' },
-  cpp: { component: Cpu, color: '#00599C', label: 'C++' },
-  python: { component: Terminal, color: '#3776AB', label: 'Python' },
-  java: { component: Coffee, color: '#007396', label: 'Java' },
-  git: { component: GitBranch, color: '#F05032', label: 'Git' },
-  arduino: { component: Microchip, color: '#00979D', label: 'Arduino' },
-  ai: { component: Brain, color: '#FF00FF', label: 'AI/ML' },
-  photoshop: { component: Image, color: '#31A8FF', label: 'Photoshop' },
-  aftereffects: { component: Video, color: '#CF96FD', label: 'After Effects' },
-  esp32: { component: Cpu, color: '#E7352C', label: 'ESP32' },
+const iconComponents: Record<IconType, { component: React.ElementType; color: string }> = {
+  html: { component: FileCode, color: '#E34F26' },
+  css: { component: Layers, color: '#1572B6' },
+  javascript: { component: Code2, color: '#F7DF1E' },
+  react: { component: Atom, color: '#61DAFB' },
+  node: { component: Server, color: '#339933' },
+  tailwind: { component: Wind, color: '#06B6D4' },
+  nextjs: { component: Layout, color: '#FFFFFF' },
+  typescript: { component: Code2, color: '#3178C6' },
+  cpp: { component: Cpu, color: '#00599C' },
+  python: { component: Terminal, color: '#3776AB' },
+  java: { component: Coffee, color: '#007396' },
+  git: { component: GitBranch, color: '#F05032' },
+  arduino: { component: Microchip, color: '#00979D' },
+  ai: { component: Brain, color: '#FF00FF' },
+  photoshop: { component: Image, color: '#31A8FF' },
+  aftereffects: { component: Video, color: '#CF96FD' },
+  esp32: { component: Cpu, color: '#E7352C' },
 };
 
-const Orbit = ({ radius, speed, icons, reverse = false }: { radius: number; speed: number; icons: IconType[]; reverse?: boolean }) => {
+const SkillIcon = ({ type, radius, speed, reverse = false, index, total }: { type: IconType; radius: number; speed: number; reverse?: boolean; index: number; total: number }) => {
+  const Icon = iconComponents[type].component;
+  const initialRotation = (index / total) * 360;
+
   return (
     <motion.div
-      className="absolute border border-white/10 rounded-full"
-      style={{ width: radius * 2, height: radius * 2 }}
-      animate={{ rotate: reverse ? -360 : 360 }}
+      className="absolute top-1/2 left-1/2"
+      initial={{ rotate: initialRotation }}
+      animate={{ rotate: initialRotation + (reverse ? -360 : 360) }}
       transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+      style={{
+        width: radius * 2,
+        height: radius * 2,
+        transform: 'translate(-50%, -50%)',
+      }}
     >
-      {icons.map((type, i) => {
-        const angle = (i / icons.length) * (Math.PI * 2);
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-        const Icon = iconComponents[type].component;
-
-        return (
-          <div
-            key={type}
-            className="absolute flex items-center justify-center bg-slate-900 border border-slate-700 rounded-full shadow-lg p-2"
-            style={{
-              width: 40,
-              height: 40,
-              left: `calc(50% + ${x}px)`,
-              top: `calc(50% + ${y}px)`,
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            <Icon size={20} color={iconComponents[type].color} />
-          </div>
-        );
-      })}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-slate-800 border-2 border-slate-700 rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)] p-2"
+        style={{ width: 44, height: 44 }}
+      >
+        <motion.div
+           animate={{ rotate: initialRotation + (reverse ? -360 : 360) }}
+           transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+           style={{ rotate: -(initialRotation + (reverse ? -360 : 360)) }}
+        >
+          <Icon size={24} color={iconComponents[type].color} />
+        </motion.div>
+      </div>
     </motion.div>
   );
 };
 
 export default function OrbitingSkills() {
   return (
-    <div className="relative w-[600px] h-[600px] flex items-center justify-center scale-50 sm:scale-75 md:scale-100">
-      {/* Central Core */}
-      <div className="relative z-50 w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(37,99,235,0.5)] border-2 border-white/20">
-        <Layout size={32} className="text-white" />
-        <div className="absolute inset-0 rounded-full bg-blue-400 blur-xl animate-pulse opacity-50" />
+    <div className="relative w-[600px] h-[600px] flex items-center justify-center scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 opacity-100">
+      {/* Central Core - High Contrast */}
+      <div className="relative z-50 w-24 h-24 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(6,182,212,0.6)] border-4 border-white/20">
+        <Layout size={40} className="text-white drop-shadow-lg" />
+        <div className="absolute inset-0 rounded-full bg-cyan-400 blur-2xl animate-pulse opacity-40" />
       </div>
 
-      {/* Inner Orbit */}
-      <Orbit radius={80} speed={20} icons={['react', 'nextjs', 'tailwind', 'typescript']} />
-      
-      {/* Middle Orbit */}
-      <Orbit radius={160} speed={35} icons={['node', 'python', 'cpp', 'java', 'git']} reverse />
-      
-      {/* Outer Orbit */}
-      <Orbit radius={240} speed={50} icons={['arduino', 'ai', 'photoshop', 'aftereffects', 'esp32']} />
+      {/* Orbit Rings for visibility */}
+      <div className="absolute w-[160px] h-[160px] border border-white/10 rounded-full" />
+      <div className="absolute w-[320px] h-[320px] border border-white/10 rounded-full" />
+      <div className="absolute w-[480px] h-[480px] border border-white/10 rounded-full" />
+
+      {/* Skills Orbits */}
+      {/* Inner: Web */}
+      <SkillIcon type="react" radius={80} speed={15} index={0} total={4} />
+      <SkillIcon type="nextjs" radius={80} speed={15} index={1} total={4} />
+      <SkillIcon type="tailwind" radius={80} speed={15} index={2} total={4} />
+      <SkillIcon type="typescript" radius={80} speed={15} index={3} total={4} />
+
+      {/* Middle: Langs */}
+      <SkillIcon type="node" radius={160} speed={25} index={0} total={5} reverse />
+      <SkillIcon type="python" radius={160} speed={25} index={1} total={5} reverse />
+      <SkillIcon type="cpp" radius={160} speed={25} index={2} total={5} reverse />
+      <SkillIcon type="java" radius={160} speed={25} index={3} total={5} reverse />
+      <SkillIcon type="git" radius={160} speed={25} index={4} total={5} reverse />
+
+      {/* Outer: Special */}
+      <SkillIcon type="arduino" radius={240} speed={40} index={0} total={5} />
+      <SkillIcon type="ai" radius={240} speed={40} index={1} total={5} />
+      <SkillIcon type="photoshop" radius={240} speed={40} index={2} total={5} />
+      <SkillIcon type="aftereffects" radius={240} speed={40} index={3} total={5} />
+      <SkillIcon type="esp32" radius={240} speed={40} index={4} total={5} />
     </div>
   );
 }
