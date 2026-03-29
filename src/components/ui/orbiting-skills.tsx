@@ -4,14 +4,16 @@ import { motion } from 'framer-motion';
 import { 
   Atom, Server, Wind, 
   Layout, Cpu, Terminal, Coffee, GitBranch, 
-  Brain, Image, Video, Microchip, Layers
+  Brain, Image, Video, Microchip, Layers,
+  Sigma, CodeSquare, CircuitBoard // New Lucide icons
 } from 'lucide-react';
 
 // --- Type Definitions ---
 type IconType = 
   | 'html' | 'css' | 'javascript' | 'react' | 'node' | 'tailwind' 
   | 'nextjs' | 'typescript' | 'cpp' | 'python' | 'java' | 'git' 
-  | 'arduino' | 'ai' | 'photoshop' | 'aftereffects' | 'esp32';
+  | 'arduino' | 'ai' | 'photoshop' | 'aftereffects' | 'esp32'
+  | 'matlab' | 'vscode' | 'microprocessor'; // New icon types
 
 interface SkillConfig {
   id: string;
@@ -21,6 +23,7 @@ interface SkillConfig {
   iconType: IconType;
   phaseShift: number; // Initial position offset (0 to 1)
   reverse?: boolean;
+  label: string; // Added label for hover description
 }
 
 // --- Custom SVGs ---
