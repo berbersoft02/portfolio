@@ -1363,6 +1363,137 @@
   .hero-fallback { display: none !important; }
 }
 
+/* ====== FEATURE 1: HERO ANIMATIONS ====== */
+@keyframes heroTitleSlide {
+  from { opacity: 0; transform: translateY(30px) translateX(-20px); }
+  to { opacity: 1; transform: translateY(0) translateX(0); }
+}
+@keyframes heroSubFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroGlowPulse {
+  0%, 100% { text-shadow: 0 0 40px rgba(154, 138, 251, 0.5); }
+  50% { text-shadow: 0 0 60px rgba(184, 171, 255, 0.8); }
+}
+.hero-title { animation: heroTitleSlide 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards !important; }
+.hero-title .gradient-text { animation: heroGlowPulse 3s ease-in-out infinite; }
+.hero-sub { animation: heroSubFade 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s forwards !important; opacity: 0; }
+
+/* ====== FEATURE 2: PAGE TRANSITION ANIMATIONS ====== */
+@keyframes pageEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body { animation: pageEnter 0.4s ease-in-out; }
+section { transition: opacity 0.3s ease-in-out; }
+
+/* ====== FEATURE 3: SMOOTH SCROLL REVEAL ENHANCEMENTS ====== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: revealOnScroll 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+@keyframes revealOnScroll {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== FEATURE 4: FLOATING BACKGROUND ELEMENTS ====== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-20px) rotate(5deg); }
+  50% { transform: translateY(-40px) rotate(10deg); }
+  75% { transform: translateY(-20px) rotate(5deg); }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(-5deg); }
+}
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+  position: absolute;
+  pointer-events: none;
+}
+.floating-element:nth-child(2) { animation-delay: 1s; animation-name: floatSlow; animation-duration: 8s; }
+.floating-element:nth-child(3) { animation-delay: 2s; }
+
+/* ====== FEATURE 5: ENHANCED MAGNETIC BUTTON ====== */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(184, 171, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(154, 138, 251, 0.3);
+}
+
+/* ====== FEATURE 6: COPY EMAIL BUTTON STYLES ====== */
+.copy-email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(154, 138, 251, 0.1);
+  border: 1px solid rgba(154, 138, 251, 0.3);
+  border-radius: 8px;
+  color: var(--accent-bright);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+  position: relative;
+}
+.copy-email-btn:hover {
+  background: rgba(154, 138, 251, 0.2);
+  border-color: var(--accent-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(154, 138, 251, 0.2);
+}
+.copy-email-btn.copied {
+  background: rgba(194, 188, 210, 0.1);
+  border-color: var(--mint);
+  color: var(--mint);
+}
+.copy-email-btn.copied::after {
+  content: '✓ Copied!';
+  position: absolute;
+  left: 50%;
+  top: -28px;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: copyToast 2s ease-in-out forwards;
+}
+@keyframes copyToast {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+}
+
 </style>
 </head>
 <body>
@@ -2036,7 +2167,7 @@
           </p>
 
           <div class="contact-channels">
-            <a class="channel" href="mailto:Berbersoft@gmail.com">
+            <button class="channel copy-email-btn" id="copy-email-btn" type="button" title="Click to copy email">
               <span class="channel-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
               </span>
@@ -2044,7 +2175,7 @@
                 <span class="channel-label" data-i18n="contact.email_label">Email</span>
                 <span class="channel-val">Berbersoft@gmail.com</span>
               </span>
-            </a>
+            </button>
             <a class="channel" href="tel:+213560117221">
               <span class="channel-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -3835,6 +3966,185 @@
       contactCta.classList.toggle('show', pastHero);
     }, { passive: true });
   }
+</script>
+
+<!-- ====== FEATURE 1: COPY EMAIL BUTTON ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const copyEmailBtn = document.getElementById('copy-email-btn');
+  if (copyEmailBtn) {
+    copyEmailBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const email = 'Berbersoft@gmail.com';
+
+      // Copy to clipboard
+      navigator.clipboard.writeText(email).then(function() {
+        // Add copied state
+        copyEmailBtn.classList.add('copied');
+        copyEmailBtn.style.pointerEvents = 'none';
+
+        // Remove copied state after 2 seconds
+        setTimeout(function() {
+          copyEmailBtn.classList.remove('copied');
+          copyEmailBtn.style.pointerEvents = 'auto';
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Failed to copy email:', err);
+      });
+    });
+  }
+});
+</script>
+
+<!-- ====== FEATURE 2: SMOOTH PAGE TRANSITIONS ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scroll navigation
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || !document.querySelector(href)) return;
+
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+});
+</script>
+
+<!-- ====== FEATURE 3: ENHANCED SCROLL REVEAL ANIMATIONS ====== -->
+<script>
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = entry.target.style.animation || 'revealOnScroll 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards';
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+});
+</script>
+
+<!-- ====== FEATURE 4: FLOATING ELEMENTS ANIMATION ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Create floating tech icons in hero section
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    const floatingElements = ['◆', '◇', '◈'];
+    const colors = ['rgba(154, 138, 251, 0.1)', 'rgba(194, 188, 210, 0.05)', 'rgba(184, 171, 255, 0.08)'];
+
+    for (let i = 0; i < 3; i++) {
+      const el = document.createElement('div');
+      el.className = 'floating-element';
+      el.textContent = floatingElements[i];
+      el.style.cssText = `
+        left: ${20 + i * 30}%;
+        top: ${10 + i * 15}%;
+        font-size: ${30 + i * 10}px;
+        color: ${colors[i]};
+        animation-delay: ${i * 0.5}s;
+        z-index: 0;
+      `;
+      heroSection.insertBefore(el, heroSection.firstChild);
+    }
+  }
+});
+</script>
+
+<!-- ====== FEATURE 5: ENHANCED MAGNETIC BUTTON EFFECTS ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.querySelectorAll('.btn, .btn-solid, .nav-cta');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Add subtle perspective effect
+      const xPercent = (x / rect.width - 0.5) * 10;
+      const yPercent = (y / rect.height - 0.5) * 10;
+
+      this.style.transform = `perspective(1000px) rotateX(${yPercent}deg) rotateY(${-xPercent}deg) translateZ(10px)`;
+    });
+
+    btn.addEventListener('mouseleave', function() {
+      this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+    });
+  });
+});
+</script>
+
+<!-- ====== FEATURE 6: MOBILE OPTIMIZATION & RESPONSIVE ENHANCEMENTS ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Detect mobile and adjust animations
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    // Reduce animation complexity on mobile
+    document.querySelectorAll('[style*="animation"]').forEach(el => {
+      el.style.animationDuration = '0.4s';
+    });
+
+    // Optimize button hover effects on touch devices
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('touchstart', function() {
+        this.style.opacity = '0.8';
+      });
+      btn.addEventListener('touchend', function() {
+        this.style.opacity = '1';
+      });
+    });
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    const newIsMobile = window.innerWidth <= 768;
+    if (newIsMobile !== isMobile) {
+      location.reload(); // Reload for responsive adjustment
+    }
+  });
+});
+</script>
+
+<!-- ====== FEATURE 7: ENHANCED NAVBAR BRANDING ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const brand = document.querySelector('.brand');
+  if (brand) {
+    brand.addEventListener('mouseenter', function() {
+      const badge = this.querySelector('div');
+      if (badge) {
+        badge.style.transform = 'scale(1.1) rotate(5deg)';
+        badge.style.boxShadow = '0 0 40px rgba(184, 171, 255, 0.6)';
+      }
+    });
+
+    brand.addEventListener('mouseleave', function() {
+      const badge = this.querySelector('div');
+      if (badge) {
+        badge.style.transform = 'scale(1) rotate(0)';
+        badge.style.boxShadow = '0 0 20px rgba(154, 138, 251, 0.3)';
+      }
+    });
+  }
+});
 </script>
 
 </body>
