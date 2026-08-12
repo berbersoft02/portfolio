@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(netstat -ano)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(py _apply_lang.py)",
+      "Bash(ls -la src)",
+      "Bash(cat components.json)",
+      "Bash(ls -la public)",
+      "Bash(TWENTYFIRST_TOKEN=\"21st_sk_1f7777068584f6b85663f07aadc3256ba747479860776e36b02f4e23aebef0bc\" npx shadcn@latest add \"https://21st.dev/r/ashishrajwaniai01/asmr-background\")",
+      "mcp__21st__get_usage",
+      "mcp__21st__get_component",
+      "Bash(node -e ' *)",
+      "Bash(npx shadcn@latest add \"https://21st.dev/r/rmahammad/border-beam-panel\")",
+      "mcp__21st__search",
+      "Bash(node *)",
+      "WebFetch(domain:21st.dev)",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(npx --version)",
+      "Bash(npx --no-install @gltf-transform/cli --version)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(npx gltf-transform *)",
+      "Skill(update-config)",
+      "Bash(git clone *)",
+      "Read(//c/tmp/**)",
+      "Bash(rm -rf /c/Users/ASUS/Downloads/Portfolio/claude-code-perplexity-mcp)",
+      "Bash(pkill -f \"node.*perplexity\")",
+      "Bash(git add *)",
+      "Bash(git commit -m 'feat: Phase 1 - Visual & Animation Enhancements *)",
+      "Bash(git push *)",
+      "Bash(git commit -m 'feat: add custom gradient purple scrollbar with glow effects *)",
+      "Bash(git commit -m 'fix: resolve duplicate observerOptions variable causing JavaScript error *)",
+      "Bash(git commit -m 'fix: correct remaining observer reference to scrollObserver *)",
+      "Bash(git commit -m 'feat: add GitHub and LinkedIn links to contact section *)"
+    ]
+  }
+}

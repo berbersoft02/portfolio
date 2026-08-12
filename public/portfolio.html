@@ -1,0 +1,3838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Said Ahrikenchikh Embedded Systems Engineer</title>
+<meta name="description" content="Portfolio of Said Ahrikenchikh embedded systems engineer. Master's in Integrated Systems Electronics (UMMTO). Embedded AI, IoT, real-time systems, sign language translation, motor control.">
+<meta name="author" content="Said Ahrikenchikh">
+<meta name="keywords" content="embedded systems, embedded AI, IoT, STM32, ESP32, Arduino, computer vision, Android, sign language, UMMTO, portfolio">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Said Ahrikenchikh Embedded Systems Engineer">
+<meta property="og:description" content="Graduate embedded systems engineer building at the intersection of hardware, embedded AI and mobile.">
+<meta property="og:url" content="https://berbersoft02-portfolio.vercel.app/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000000'/%3E%3Crect x='10' y='10' width='44' height='44' rx='4' fill='none' stroke='%239a8afb' stroke-width='3'/%3E%3Cpath d='M22 44l8-22h4l8 22h-6l-5-12-5 12z' fill='%23b8abff'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Nohemi:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Said Ahrikenchikh",
+  "jobTitle": "Embedded Systems Engineer",
+  "email": "mailto:Berbersoft@gmail.com",
+  "telephone": "+213 560 117 221",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Tizi Ouzou",
+    "addressCountry": "Algeria"
+  },
+  "url": "https://berbersoft02-portfolio.vercel.app/",
+  "knowsAbout": ["Embedded Systems", "Embedded AI", "IoT", "Computer Vision", "Android Development"]
+}
+</script>
+<style>
+  :root{
+    /* palette Senthora design system */
+    --bg:            #000000;
+    --bg-soft:       #110f14;
+    --bg-elev:       #16131a;
+    --line:          #2a2533;
+    --line-soft:     #1e1a26;
+    --text:          #eaeaf0;
+    --text-soft:     #c2bcd2;
+    --text-dim:      #a49db5;
+    --accent:        #9a8afb;        /* purple primary */
+    --accent-bright: #b8abff;
+    --accent-soft:   #7b6ad4;
+    --mint:          #c2bcd2;        /* muted lavender secondary */
+    --mint-soft:     #3a2f50;
+    --danger:        #e87a6e;
+
+    --radius: 14px;
+    --radius-sm: 20px;
+    --radius-lg: 32px;
+
+    --shadow-1: rgba(0,0,0,0.45) 0px 12px 40px 0px;
+    --shadow-2: rgba(154,138,251,0.4) 0px 0px 24px 0px;
+    --shadow-3: rgba(154,138,251,0.12) 0px 0px 80px 0px;
+
+    --ease: cubic-bezier(.2,.7,.2,1);
+    --duration-instant: 300ms;
+    --duration-fast: 400ms;
+    --nav-h: 68px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{
+    scroll-behavior:smooth;
+    scroll-padding-top: calc(var(--nav-h) + 24px);
+  }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nohemi', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+  body.locked{overflow:hidden;}
+  ::selection{background: var(--accent); color: #000000;}
+  :focus-visible{outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px;}
+
+  /* ====== background ambience ====== */
+  .ambient{
+    position: fixed; inset: 0; z-index: -3; pointer-events: none;
+    background:
+      radial-gradient(60% 50% at 80% 0%, rgba(154,138,251,.08), transparent 60%),
+      radial-gradient(50% 40% at 10% 30%, rgba(194,188,210,.05), transparent 60%),
+      linear-gradient(180deg, #000000 0%, #08090c 100%);
+  }
+  .grid-overlay{
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 80%);
+  }
+
+  /* ====== ASMR particle layer (vanilla port of 21st "asmr-background") ====== */
+  #asmr-bg{
+    position: fixed; inset: 0; z-index: -1;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+
+  /* ====== layout primitives ====== */
+  .wrap{max-width: 1180px; margin: 0 auto; padding: 0 28px;}
+  .mono{font-family: 'JetBrains Mono', ui-monospace, monospace;}
+
+  /* ====== nav ====== */
+  #navbar{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(14,14,20,.7);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid transparent;
+    transition: background .3s var(--ease), border-color .3s var(--ease);
+  }
+  #navbar.scrolled{
+    background: rgba(14,14,20,.92);
+    border-bottom-color: var(--line);
+  }
+  .nav-inner{
+    display: flex; align-items: center; justify-content: space-between;
+    height: var(--nav-h);
+    gap: 20px;
+  }
+  .brand{
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: .02em;
+  }
+  .brand-mark{
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+    display: grid; place-items: center;
+    color: #0a0d10; font-weight: 800; font-size: 14px;
+    box-shadow: 0 4px 14px -4px rgba(154,138,251,.5);
+  }
+  .brand b{color: var(--text); font-weight: 600;}
+  .brand span{color: var(--text-dim);}
+
+  .nav-links{display: flex; list-style: none; gap: 2px; align-items: center;}
+  .nav-links a{
+    font-size: 13.5px; font-weight: 500;
+    color: var(--text-soft);
+    text-decoration: none;
+    padding: 8px 13px;
+    border-radius: 8px;
+    position: relative;
+    transition: color .2s var(--ease), background .2s var(--ease);
+  }
+  .nav-links a:hover{color: var(--text); background: rgba(255,255,255,.04);}
+  .nav-links a.active{color: var(--accent-bright);}
+
+  .nav-cta{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px; font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+    padding: 9px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255,255,255,.02);
+    transition: all .2s var(--ease);
+  }
+  .nav-cta:hover{
+    border-color: var(--accent);
+    color: var(--accent-bright);
+    background: rgba(154,138,251,.06);
+  }
+
+  #nav-toggle{
+    display: none; background: none; border: 1px solid var(--line);
+    cursor: pointer; padding: 8px; border-radius: 8px;
+    flex-direction: column; gap: 4px; z-index: 210;
+  }
+  #nav-toggle span{
+    display: block; width: 18px; height: 1.5px;
+    background: var(--text-soft);
+    transition: .3s var(--ease);
+    border-radius: 2px;
+  }
+  #nav-toggle.open span:nth-child(1){transform: translateY(5.5px) rotate(45deg); background: var(--accent);}
+  #nav-toggle.open span:nth-child(2){transform: translateY(-5.5px) rotate(-45deg); background: var(--accent);}
+
+  /* ====== scroll progress ====== */
+  #scroll-progress{
+    position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 300;
+    background: linear-gradient(90deg, var(--accent), var(--mint));
+    pointer-events: none;
+    box-shadow: 0 0 12px rgba(154,138,251,.5);
+  }
+
+  /* ====== buttons ====== */
+  .btn{
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    font-family: 'Nohemi', 'Segoe UI', sans-serif;
+    font-size: 14px; font-weight: 500;
+    padding: 13px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    color: var(--text);
+    background: rgba(255,255,255,.02);
+    transition: all .25s var(--ease);
+    white-space: nowrap;
+  }
+  .btn:hover{
+    border-color: rgba(154,138,251,.5);
+    background: rgba(154,138,251,.06);
+    transform: translateY(-1px);
+  }
+  .btn-solid{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000000;
+    font-weight: 600;
+    box-shadow: 0 8px 24px -10px rgba(154,138,251,.5);
+  }
+  .btn-solid:hover{
+    background: var(--accent-bright);
+    border-color: var(--accent-bright);
+    color: #000000;
+    box-shadow: 0 12px 32px -10px rgba(154,138,251,.6);
+  }
+  .btn .icon{width: 16px; height: 16px;}
+
+  /* ====== CV download dropdown (EN / FR) ====== */
+  .cv-drop{position: relative; display: inline-flex;}
+  .cv-drop .chev{transition: transform .25s var(--ease);}
+  .cv-drop.open .chev{transform: rotate(180deg);}
+  .cv-menu{
+    position: absolute; top: calc(100% + 10px); left: 0; z-index: 120;
+    min-width: 212px; max-width: calc(100vw - 40px);
+    padding: 6px;
+    background: rgba(13,16,25,.96);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 18px 48px -12px rgba(0,0,0,.6);
+    backdrop-filter: blur(14px);
+    opacity: 0; transform: translateY(-6px) scale(.98);
+    visibility: hidden; pointer-events: none;
+    transition: opacity .18s var(--ease), transform .18s var(--ease), visibility .18s;
+  }
+  .cv-drop.open .cv-menu{
+    opacity: 1; transform: translateY(0) scale(1);
+    visibility: visible; pointer-events: auto;
+  }
+  .cv-menu a{
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Nohemi', 'Segoe UI', sans-serif;
+    font-size: 13.5px; font-weight: 500;
+    white-space: nowrap;
+    transition: background .15s var(--ease), color .15s var(--ease);
+  }
+  .cv-menu a:hover{background: rgba(154,138,251,.1); color: var(--accent-bright);}
+  .cv-lang{
+    flex: none;
+    display: inline-grid; place-items: center;
+    width: 26px; height: 22px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: .04em;
+    color: var(--accent-bright);
+    background: rgba(154,138,251,.12);
+    border: 1px solid rgba(154,138,251,.25);
+  }
+  .nav-cv-drop .cv-menu{left: auto; right: 0;}
+  .hero-cta .cv-drop{flex: 1 1 auto;}
+
+  /* ====== typography helpers ====== */
+  .eyebrow{
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 500;
+    color: var(--accent-bright);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .eyebrow .dot{
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(154,138,251,.15);
+  }
+  .sec-head{
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 56px; flex-wrap: wrap; gap: 16px;
+  }
+  h2.sec-title{
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.15; letter-spacing: -.02em;
+    font-weight: 600; color: var(--text);
+    margin-top: 14px;
+  }
+  .sec-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--text-dim);
+  }
+
+  /* ====== sections ====== */
+  section{
+    position: relative; z-index: 1;
+    padding: 120px 0;
+    background: transparent;
+  }
+  section.tight{padding: 80px 0;}
+
+  /* ====== HERO ====== */
+  #hero{
+    position: relative;
+    min-height: 100vh;
+    padding: calc(var(--nav-h) + 60px) 0 80px;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-grid{
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 40px; align-items: center;
+  }
+  .hero-content{
+    max-width: 640px;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-status{
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 500;
+    color: var(--mint);
+    background: rgba(194,188,210,.06);
+    border: 1px solid rgba(194,188,210,.2);
+    padding: 7px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .hero-status .pulse{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--mint);
+    box-shadow: 0 0 0 0 rgba(194,188,210,.6);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow: 0 0 0 0 rgba(194,188,210,.5);}
+    50%{box-shadow: 0 0 0 8px rgba(194,188,210,0);}
+  }
+
+  .hero-kicker{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  .hero-kicker .prompt{color: var(--accent);}
+
+  h1.hero-title{
+    font-size: clamp(38px, 5.6vw, 76px);
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 22px;
+    text-shadow: 0 0 40px rgba(154, 138, 251, 0.4), 0 0 20px rgba(154, 138, 251, 0.2);
+  }
+
+  /* Make the non-gradient lines bolder */
+  h1.hero-title{
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h1.hero-title .accent{color: var(--accent-bright); font-style: italic; font-weight: 500;}
+  h1.hero-title .grad{
+    background: linear-gradient(135deg, var(--text) 0%, var(--text-soft) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* designali-in/gradient-text style animation */
+  .gradient-text {
+    background: linear-gradient(
+      90deg,
+      #00f0ff 0%,
+      #7000ff 25%,
+      #ff007a 50%,
+      #7000ff 75%,
+      #00f0ff 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shine 4s linear infinite;
+    display: inline-block;
+  }
+
+  @keyframes gradient-shine {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .hero-sub{
+    font-size: 17.5px; line-height: 1.6;
+    color: var(--text-soft);
+    max-width: 540px;
+    margin-bottom: 36px;
+  }
+
+  .hero-cta{
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 48px;
+  }
+  .hero-meta{
+    display: flex; flex-wrap: wrap; gap: 28px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .hero-meta-item{
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .hero-meta-item .label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: .1em;
+  }
+  .hero-meta-item .val{
+    font-size: 14px; color: var(--text); font-weight: 500;
+  }
+  .hero-meta-item a{color: var(--text); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s;}
+  .hero-meta-item a:hover{border-bottom-color: var(--accent);}
+
+  /* ====== full-page 3D background ====== */
+  #bg-3d{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: auto;
+    overflow: hidden;
+    background: #000000;  /* fallback in case canvas fails to render */
+  }
+  #bg-3d canvas{
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .bg-overlay{
+    position: absolute; inset: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+  .board-assembly{ display: none; }
+
+  /* each language badge has its own gentle float, offset for liveliness.
+     IMPORTANT: SVG `transform` attribute on the outer <g> sets position.
+     CSS `transform` on the SAME element would wipe that out, so we put
+     the float animation on an inner .badge-inner wrapper instead. */
+  .badge-inner{
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-name: badgeFloat;
+  }
+  .badge-c   .badge-inner{animation-duration: 6.0s;}
+  .badge-py  .badge-inner{animation-duration: 5.5s; animation-delay: -.4s;}
+  .badge-kt  .badge-inner{animation-duration: 6.4s; animation-delay: -.8s;}
+  .badge-js  .badge-inner{animation-duration: 5.8s; animation-delay: -1.2s;}
+  .badge-nx  .badge-inner{animation-duration: 6.2s; animation-delay: -1.6s;}
+  .badge-ar  .badge-inner{animation-duration: 5.7s; animation-delay: -2.0s;}
+  .badge-ml  .badge-inner{animation-duration: 6.3s; animation-delay: -2.4s;}
+  .badge-cpp .badge-inner{animation-duration: 5.9s; animation-delay: -2.8s;}
+  @keyframes badgeFloat{
+    0%,100%{transform: translateY(0);}
+    50%{transform: translateY(-10px);}
+  }
+
+  .hero-hint{
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    z-index: 2; text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .hero-hint .arrow{display: inline-block; animation: bob 1.6s ease-in-out infinite;}
+  @keyframes bob{
+    0%,100%{transform: translateY(0);}
+    50%{transform: translateY(4px);}
+  }
+
+  /* ====== profile ====== */
+  #profile .sheet{
+    background: linear-gradient(180deg, var(--bg-elev), var(--bg-soft));
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 44px;
+    position: relative;
+    box-shadow: var(--shadow-1);
+  }
+  #profile .sheet::before{
+    content: '';
+    position: absolute; top: 0; left: 24px; right: 24px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: .5;
+  }
+  #profile p{
+    font-size: 17px; line-height: 1.8; color: var(--text-soft);
+    max-width: 780px;
+  }
+  #profile p + p{margin-top: 18px;}
+  #profile p strong{color: var(--text); font-weight: 500;}
+  .meta-row{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .meta-item{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .meta-item .k{color: var(--text-dim); display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .1em;}
+  .meta-item .v{color: var(--text); font-weight: 500;}
+
+  /* ====== skills ====== */
+  .skill-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .skill-card{
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: all .3s var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ====== glare-card hover effect (Aceternity / Linear style) ====== */
+  .skill-card .glare{
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .4s ease;
+    background: radial-gradient(
+      600px circle at var(--gx, 50%) var(--gy, 50%),
+      rgba(255,255,255,.08),
+      transparent 40%
+    );
+  }
+  .skill-card:hover .glare{ opacity: 1; }
+  @media (prefers-reduced-motion: reduce){
+    .skill-card .glare{ transition: none; opacity: 0; }
+  }
+  /* ====== NEOCONDA OBSIDIAN GLASSMORPHISM SYSTEM ====== */
+  .sheet, .skill-card, .project, .info-card, .contact-card {
+    background: rgba(10, 14, 22, 0.76) !important;
+    border: 1px solid rgba(154, 138, 251, 0.18) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s var(--ease);
+  }
+
+  .sheet::before, .skill-card::before, .project::before, .info-card::before, .contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(154, 138, 251, 0.45), transparent);
+    opacity: 0.8;
+  }
+
+  .sheet:hover, .skill-card:hover, .project:hover, .info-card:hover, .contact-card:hover {
+    border-color: rgba(154, 138, 68, 0.45) !important;
+    box-shadow: 0 16px 40px -15px rgba(154, 138, 251, 0.18) !important;
+    transform: translateY(-3px);
+  }
+
+  .skill-head{
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .skill-head h3{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .skill-head .tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-bright);
+    border: 1px solid rgba(154, 138, 251, 0.3);
+    background: rgba(154, 138, 251, 0.08);
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+
+  .chips{display: flex; flex-wrap: wrap; gap: 7px;}
+  .chip{
+    font-size: 13px; font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: var(--text-soft);
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    transition: all .2s var(--ease);
+  }
+  .chip:hover{
+    border-color: rgba(154, 138, 251, 0.4);
+    color: var(--text);
+  }
+
+  /* ====== projects ====== */
+  .projects{display: flex; flex-direction: column; gap: 24px;}
+  .project{
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all .3s var(--ease);
+  }
+  .project:hover{
+    border-color: rgba(154,138,251,.3);
+    box-shadow: var(--shadow-2);
+    transform: translateY(-2px);
+  }
+
+  /* ====== border-beam project cards (vanilla port of 21st "border-beam-panel") ====== */
+  [data-border-beam]{
+    position: relative;
+    isolation: isolate;
+    --mk-beam-a: 40deg;
+  }
+  [data-border-beam] .mk-beam-ring,
+  [data-border-beam] .mk-beam-glow{
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      conic-gradient(
+        from var(--mk-beam-a, 0deg),
+        transparent 0deg,
+        color-mix(in srgb, var(--accent) 4%, transparent) 18deg,
+        color-mix(in srgb, var(--accent) 55%, transparent) 46deg,
+        var(--accent) 56deg,
+        color-mix(in srgb, var(--accent) 22%, #ffffff) 60deg,
+        transparent 63deg,
+        transparent 198deg,
+        color-mix(in srgb, var(--accent-bright) 4%, transparent) 216deg,
+        color-mix(in srgb, var(--accent-bright) 50%, transparent) 244deg,
+        var(--accent-bright) 254deg,
+        color-mix(in srgb, var(--accent-bright) 26%, #ffffff) 258deg,
+        transparent 261deg,
+        transparent 360deg
+      );
+  }
+  [data-border-beam] .mk-beam-ring{
+    padding: 2px;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+  [data-border-beam] .mk-beam-glow{
+    filter: blur(14px);
+    opacity: 0.35;
+    z-index: -1;
+  }
+  @media (forced-colors: active){
+    [data-border-beam] .mk-beam-ring,
+    [data-border-beam] .mk-beam-glow{ display: none; }
+    [data-border-beam]{ border-color: CanvasText; }
+  }
+
+
+  /* ====== random letter-swap nav links (vanilla port of 21st "m-random-letter-swap-1") ====== */
+  /* font-size: 0 on the <a> collapses the natural gaps between inline-block children;
+     restore on the letter boxes so each character renders at the correct size. */
+  #nav-links a{
+    font-size: 0;
+    line-height: 0;
+  }
+  #nav-links .rls-box{
+    display: inline-block;
+    position: relative;
+    height: 1.1em;
+    overflow: hidden;
+    vertical-align: text-bottom;
+    font-size: 13.5px;
+    line-height: 1.1em;
+  }
+  #nav-links .rls-box::before{
+    content: attr(data-ch);
+    display: block;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+  #nav-links .rls-stack{
+    position: absolute;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    transition: transform .55s cubic-bezier(.22,1,.36,1);
+    transition-delay: calc(var(--i) * .025s);
+  }
+  #nav-links .rls-it{
+    display: block;
+    height: 1.1em;
+    line-height: 1.1em;
+  }
+  #nav-links a:hover .rls-stack,
+  #nav-links a:focus-visible .rls-stack{
+    transform: translateY(calc(var(--stack) * -1.1em));
+  }
+  @media (prefers-reduced-motion: reduce){
+    #nav-links a:hover .rls-stack,
+    #nav-links a:focus-visible .rls-stack{ transform: none; }
+  }
+  .project-info{
+    padding: 40px;
+    display: flex; flex-direction: column;
+  }
+  .project-head{
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--text-dim);
+  }
+  .project-head .dot{
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .project-head .year{
+    color: var(--accent-bright);
+    font-weight: 500;
+  }
+  .project-title{
+    font-size: 24px; font-weight: 600;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -.01em;
+  }
+  .project-org{
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-bottom: 18px;
+  }
+  .project-desc{
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .project-desc li{
+    position: relative;
+    padding-left: 22px;
+    font-size: 14.5px; line-height: 1.7;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+  }
+  .project-desc li::before{
+    content: '';
+    position: absolute; left: 0; top: 11px;
+    width: 12px; height: 1px;
+    background: var(--accent);
+  }
+  .project-tags{
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: auto; padding-top: 18px;
+  }
+  .project-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--mint);
+    background: rgba(194,188,210,.06);
+    border: 1px solid rgba(194,188,210,.15);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+  .project-badge{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--mint);
+    background: rgba(194,188,210,.08);
+    border: 1px solid rgba(194,188,210,.25);
+    padding: 6px 12px;
+    border-radius: 100px;
+    margin-top: 14px;
+    align-self: flex-start;
+  }
+
+  /* tech stack icons */
+  .project-icons{
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 16px;
+  }
+  .project-icons .p-icon{
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    color: var(--text-soft);
+    background: rgba(194,188,210,.07);
+    border: 1px solid rgba(194,188,210,.14);
+    transition: color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+  }
+  .project-icons .p-icon:hover{
+    color: var(--accent-bright);
+    border-color: rgba(154,138,251,.45);
+    transform: translateY(-2px);
+  }
+  .project-icons .p-icon svg{ width: 18px; height: 18px; }
+
+  /* impact metrics */
+  .project-metrics{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .p-metric{
+    background: rgba(194,188,210,.05);
+    border: 1px solid rgba(194,188,210,.12);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex; flex-direction: column; gap: 3px;
+    transition: border-color .2s var(--ease), background .2s var(--ease);
+  }
+  .p-metric:hover{
+    border-color: rgba(154,138,251,.35);
+    background: rgba(154,138,251,.06);
+  }
+  .p-metric strong{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 17px;
+    line-height: 1.1;
+    color: var(--accent-bright);
+  }
+  .p-metric span{
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--text-dim);
+  }
+
+  /* "read more" disclosure */
+  .project-more-wrap{
+    margin-top: 14px;
+  }
+  .project-more-wrap summary{
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent);
+    transition: color .2s var(--ease);
+    user-select: none;
+  }
+  .project-more-wrap summary::-webkit-details-marker{ display: none; }
+  .project-more-wrap summary:hover{ color: var(--accent-bright); }
+  .project-more-wrap summary::after{
+    content: '';
+    width: 6px; height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform .25s var(--ease);
+    margin-left: 2px;
+  }
+  .project-more-wrap[open] summary::after{ transform: rotate(225deg); }
+  .project-more-wrap .project-desc{ margin: 10px 0 0; }
+
+  .project-visual{
+    background:
+      radial-gradient(circle at 30% 30%, rgba(154,138,251,.06), transparent 70%),
+      var(--bg-elev);
+    position: relative;
+    min-height: 360px;
+    display: grid; place-items: center;
+    overflow: hidden;
+    border-left: 1px solid var(--line);
+  }
+  .project-visual svg{
+    width: 80%; max-width: 360px; height: auto;
+  }
+  .project-visual .glow{
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, var(--glow-color, rgba(154,138,251,.15)), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ====== education timeline ====== */
+  .timeline{
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before{
+    content: '';
+    position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--line) 100%);
+  }
+  .t-item{
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .t-item:last-child{padding-bottom: 0;}
+  .t-item::before{
+    content: '';
+    position: absolute; left: -32px; top: 6px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px rgba(154,138,251,.2);
+  }
+  .t-year{
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-bright); font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .t-title{
+    font-size: 19px; font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: -.01em;
+  }
+  .t-sub{
+    font-size: 14px; color: var(--text-soft);
+    margin-bottom: 8px;
+  }
+  .t-note{
+    font-size: 14.5px; color: var(--text-soft);
+    line-height: 1.65;
+    max-width: 640px;
+    margin-top: 6px;
+  }
+
+  /* ====== info cards ====== */
+  .info-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .info-card{
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+  .info-card h3{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--text-dim);
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .lang-row{
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14.5px;
+  }
+  .lang-row:last-child{border-bottom: none;}
+  .lang-level{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; color: var(--mint);
+    background: rgba(194,188,210,.06);
+    border: 1px solid rgba(194,188,210,.18);
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+  .info-card p{font-size: 14.5px; line-height: 1.7; color: var(--text-soft);}
+
+  /* ====== contact ====== */
+  #contact{padding-bottom: 80px;}
+  .contact-card{
+    background: linear-gradient(180deg, var(--bg-elev), var(--bg-soft));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 56px;
+    box-shadow: var(--shadow-1);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card::before{
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), rgba(194,188,210,0.7), transparent);
+    opacity: .6;
+  }
+  .contact-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .contact-left h2{
+    font-size: clamp(28px, 3.2vw, 38px);
+    line-height: 1.15; letter-spacing: -.02em;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .contact-left p{
+    font-size: 16px; line-height: 1.65;
+    color: var(--text-soft);
+    margin-bottom: 28px;
+    max-width: 420px;
+  }
+  .contact-channels{
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .channel{
+    display: flex; align-items: center; gap: 14px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14.5px;
+    padding: 10px 0;
+    transition: color .2s;
+  }
+  .channel:hover{color: var(--accent-bright);}
+  .channel-icon{
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    display: grid; place-items: center;
+    color: var(--accent);
+    flex: none;
+  }
+  .channel-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: .1em;
+    display: block; margin-bottom: 2px;
+  }
+  .channel-val{font-weight: 500;}
+
+  /* contact form */
+  .form{display: flex; flex-direction: column; gap: 16px;}
+  .field{display: flex; flex-direction: column; gap: 8px;}
+  .field label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: .1em;
+  }
+  .field input, .field textarea{
+    font-family: 'Nohemi', 'Segoe UI', sans-serif;
+    font-size: 14.5px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: 8px;
+    transition: border-color .2s, background .2s;
+    width: 100%;
+    resize: vertical;
+  }
+  .field input:focus, .field textarea:focus{
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg-soft);
+  }
+  .field textarea{min-height: 120px; line-height: 1.6;}
+  .form-row{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .form-status{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px; color: var(--mint);
+    min-height: 18px;
+  }
+  .form-status.error{color: var(--danger);}
+  .form .btn{width: 100%; padding: 14px; margin-top: 4px;}
+
+  /* ====== footer ====== */
+  footer{
+    text-align: center;
+    padding: 32px 0 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--text-dim);
+    letter-spacing: .04em;
+  }
+  footer .sep{color: var(--accent); margin: 0 8px;}
+
+  /* Floating Contact CTA */
+  .contact-cta {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 900;
+    padding: 12px 24px;
+    background: var(--accent);
+    color: #050811;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+
+  .contact-cta.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .contact-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(0, 240, 255, 0.6);
+  }
+
+  /* ====== back to top ====== */
+  #to-top{
+    position: fixed; right: 22px; bottom: 22px; z-index: 150;
+    width: 44px; height: 44px; border-radius: 12px;
+    border: 1px solid var(--line);
+    background: rgba(15,19,24,.85);
+    backdrop-filter: blur(8px);
+    color: var(--text-soft); cursor: pointer;
+    display: grid; place-items: center;
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: all .3s var(--ease);
+  }
+  #to-top.show{opacity: 1; transform: none; pointer-events: auto;}
+  #to-top:hover{
+    border-color: var(--accent);
+    color: var(--accent-bright);
+    transform: translateY(-2px);
+  }
+
+  /* ====== reveal ====== */
+  .reveal{
+    opacity: 0; transform: translateY(20px);
+    transition: opacity .8s var(--ease) var(--d, 0s), transform .8s var(--ease) var(--d, 0s);
+    will-change: opacity, transform;
+  }
+  .reveal.in{opacity: 1; transform: none;}
+
+  /* ====== scroll-triggered fade-in-up ====== */
+  .fade-in-up{
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in-up.visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ====== responsive ====== */
+  @media (max-width: 920px){
+    .hero-grid{grid-template-columns: 1fr; gap: 40px;}
+    #bg-3d{left: 0; opacity: 0.5;}
+    .hero-visual{max-width: 460px; margin: 0 auto;}
+    .project{grid-template-columns: 1fr;}
+    .project-visual{border-left: none; border-top: 1px solid var(--line); min-height: 280px;}
+    .contact-grid{grid-template-columns: 1fr; gap: 40px;}
+    .contact-card{padding: 36px 28px;}
+  }
+  @media (max-width: 720px){
+    .nav-links{
+      position: fixed; top: var(--nav-h); left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: rgba(10,13,16,.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 24px 22px;
+      transform: translateY(-10px); opacity: 0; pointer-events: none;
+      transition: .28s var(--ease);
+    }
+    .nav-links.open{transform: none; opacity: 1; pointer-events: auto;}
+    .nav-links a{padding: 14px 4px; border-bottom: 1px solid var(--line-soft); border-radius: 0;}
+    .nav-links a:last-child{border-bottom: none;}
+    .nav-cta, .nav-cv-drop{display: none;}
+    #nav-toggle{display: flex;}
+    section{padding: 80px 0;}
+    .sec-head{margin-bottom: 36px;}
+    #profile .sheet{padding: 28px 24px;}
+  }
+  @media (max-width: 480px){
+    .wrap{padding: 0 20px;}
+    .hero-cta .btn, .hero-cta .cv-drop{flex: 1;}
+    .hero-cta .cv-drop > .btn{width: 100%;}
+    .form-row{grid-template-columns: 1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior: auto;}
+    *, *::before, *::after{
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+    .reveal{opacity: 1 !important; transform: none !important;}
+    .orbit{animation: none !important;}
+  }
+
+/* ===== Language switcher (navbar) ===== */
+.lang-switcher-btn{
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(22,19,26,.7);
+  border: 1px solid rgba(154,138,251,.35);
+  color: var(--text);
+  border-radius: 100px;
+  padding: 7px 15px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  cursor: pointer; line-height: 1;
+  transition: border-color var(--duration-instant) var(--ease),
+              box-shadow var(--duration-instant) var(--ease),
+              transform var(--duration-instant) var(--ease);
+}
+.lang-switcher-btn:hover{
+  border-color: var(--accent);
+  color: var(--accent-bright);
+  box-shadow: 0 0 18px rgba(154,138,251,.35);
+  transform: translateY(-1px);
+}
+.lang-switcher-btn:focus-visible{
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+
+/* ===== Language selection modal ===== */
+#lang-modal{
+  position: fixed; inset: 0; z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  background: rgba(0,0,0,.82);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+#lang-modal.open{ opacity: 1; pointer-events: auto; }
+.lang-modal-card{
+  width: 100%; max-width: 460px;
+  background: var(--bg-soft);
+  border: 1px solid rgba(154,138,251,.28);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 30px;
+  box-shadow: var(--shadow-1), var(--shadow-3);
+  transform: translateY(18px) scale(.97);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+#lang-modal.open .lang-modal-card{ transform: translateY(0) scale(1); }
+.lang-modal-eyebrow{
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  letter-spacing: .12em; color: var(--accent-bright);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.lang-modal-title{
+  font-family: 'Nohemi', sans-serif; font-size: 22px; font-weight: 600;
+  color: var(--text); line-height: 1.25; margin-bottom: 8px;
+}
+.lang-modal-sub{
+  font-size: 14px; color: var(--text-soft); margin-bottom: 26px;
+}
+.lang-options{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.lang-opt{
+  text-align: left; cursor: pointer;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 20px 18px;
+  display: flex; flex-direction: column; gap: 6px;
+  color: var(--text);
+  transition: border-color var(--duration-instant) var(--ease),
+              background var(--duration-instant) var(--ease),
+              transform var(--duration-instant) var(--ease),
+              box-shadow var(--duration-instant) var(--ease);
+}
+.lang-opt:hover{
+  border-color: var(--accent);
+  background: rgba(154,138,251,.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.lang-opt:focus-visible{
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+.lang-opt .flag{ font-size: 30px; line-height: 1; }
+.lang-opt .name{ font-family: 'Nohemi', sans-serif; font-weight: 600; font-size: 16px; }
+.lang-opt .note{ font-size: 12px; color: var(--text-dim); }
+@media (max-width: 480px){
+  .lang-options{ grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce){
+  #lang-modal, .lang-modal-card{ transition: none; }
+}
+
+/* Mobile: Show 2D fallback, hide3D canvas */
+@media (max-width: 768px) {
+  #hero-3d { display: none !important; }
+  .hero-fallback {
+    display: block !important;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #0a0e16 0%, #1a1040 50%, #0a0e16 100%);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .hero-fallback::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(154, 138, 251, 0.15) 0%, transparent 50%);
+    animation: fallback-glow 4s ease-in-out infinite alternate;
+  }
+  @keyframes fallback-glow {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+}
+
+/* Desktop: hide 2D fallback */
+@media (min-width: 769px) {
+  .hero-fallback { display: none !important; }
+}
+
+</style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+
+<nav id="navbar" aria-label="Primary">
+  <div class="wrap nav-inner">
+    <a href="#hero" class="brand" aria-label="Back to top">
+      <span class="brand-mark">S</span>
+      <span><b>Said</b> <span>Ahrikenchikh</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#profile" data-i18n="nav.profile">Profile</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="#info" data-i18n="nav.languages">Languages</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="cv-drop nav-cv-drop">
+      <button class="nav-cta" type="button" aria-haspopup="true" aria-expanded="false" data-cv-drop>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="nav.cv">CV</span>
+        <svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="cv-menu" role="menu" aria-label="Download CV">
+        <a role="menuitem" href="./public/cv%20(Anglais)%20(1).pdf" download="Said-Ahrikenchikh-CV-EN.pdf">
+          <span class="cv-lang">EN</span><span data-i18n="hero.cv_en">English CV</span>
+        </a>
+        <a role="menuitem" href="./public/cvFR%20(3).pdf" download="Said-Ahrikenchikh-CV-FR.pdf">
+          <span class="cv-lang">FR</span><span data-i18n="hero.cv_fr">French CV</span>
+        </a>
+      </div>
+    </div>
+    <button id="lang-switcher-btn" class="lang-switcher-btn" type="button"
+            aria-label="Switch language / Changer de langue">
+      <span id="lang-current">EN</span>
+    </button>
+    <button id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ====== Full-page 3D background (PCB scene) ====== -->
+<div id="bg-3d" aria-hidden="true">
+  <canvas id="hero-3d"></canvas>
+  <div class="hero-fallback" aria-hidden="true"></div>
+  <div class="bg-overlay"></div>
+</div>
+
+<div class="ambient"></div>
+<div class="grid-overlay"></div>
+
+<!-- ASMR particle background layer (charcoal dust / glass shards, magnetic vortex) -->
+<canvas id="asmr-bg" aria-hidden="true"></canvas>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-status reveal">
+          <span class="pulse"></span>
+          <span data-i18n="hero.status">Available · Embedded · Embedded AI · IoT</span>
+        </div>
+
+        <div class="hero-kicker reveal" style="--d:.05s">
+          <span class="prompt">~/</span>said-ahrikenchikh <span style="color:var(--mint)" data-i18n="hero.kicker">master's · UMMTO</span>
+        </div>
+
+        <h1 class="hero-title reveal" style="--d:.1s" data-i18n="hero.title" data-i18n-html>
+          <span style="font-weight: 800; color: var(--text); text-shadow: 0 0 40px rgba(154, 138, 251, 0.5);">Embedded Systems<br>Electronics</span><br>
+          <span class="gradient-text">Engineer</span> &amp; <span class="gradient-text">Innovator.</span>
+        </h1>
+
+        <p class="hero-sub reveal" style="--d:.15s" data-i18n="hero.sub" data-i18n-html>
+          Architecting embedded systems, on-device AI &amp; real-time IoT. Bare-metal microcontrollers firmware, computer vision, AI and mobile apps.
+        </p>
+
+        <div class="hero-cta reveal" style="--d:.2s">
+          <a class="btn btn-solid" href="#contact">
+            <span data-i18n="hero.cta_contact">Get in touch</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <div class="cv-drop">
+            <button class="btn" type="button" aria-haspopup="true" aria-expanded="false" data-cv-drop>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-i18n="hero.cta_cv">Download CV</span>
+              <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="cv-menu" role="menu" aria-label="Download CV">
+              <a role="menuitem" href="./public/cv%20(Anglais)%20(1).pdf" download="Said-Ahrikenchikh-CV-EN.pdf">
+                <span class="cv-lang">EN</span><span data-i18n="hero.cv_en">English CV</span>
+              </a>
+              <a role="menuitem" href="./public/cvFR%20(3).pdf" download="Said-Ahrikenchikh-CV-FR.pdf">
+                <span class="cv-lang">FR</span><span data-i18n="hero.cv_fr">French CV</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-meta reveal" style="--d:.25s">
+          <div class="hero-meta-item">
+            <span class="label" data-i18n="hero.based">Based in</span>
+            <span class="val" data-i18n="hero.loc">Tizi Ouzou, Algeria</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="label" data-i18n="hero.open">Open to</span>
+            <span class="val" data-i18n="hero.mobility">EU · Remote · Relocation</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="label" data-i18n="hero.email">Email</span>
+            <a class="val" href="mailto:Berbersoft@gmail.com">Berbersoft@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-hint">
+    <span class="arrow">↓</span> &nbsp; <span data-i18n="hero.hint">scroll to explore · drag the scene to rotate</span>
+  </div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section id="profile">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="dot"></span><span data-i18n="about.eyebrow">About</span></div>
+    <h2 class="sec-title reveal" style="--d:.05s; margin-bottom: 32px;" data-i18n="about.title">
+      Engineer by training, builder by nature.
+    </h2>
+
+    <div class="sheet reveal" style="--d:.1s">
+      <p data-i18n="about.p1" data-i18n-html>
+        I hold a <strong>Master's degree in Integrated Systems Electronics</strong> from
+        UMMTO, Algeria recognized at <strong>Level 7 of the European Qualifications
+        Framework</strong> through an ENIC-NARIC certificate. My focus areas are
+        <strong>embedded systems, embedded AI, and IoT</strong>.
+      </p>
+      <p data-i18n="about.p2" data-i18n-html>
+        I've completed hands-on projects spanning microcontrollers, computer vision,
+        native Android development, and machine learning for real-time sign language
+        translation and physical system monitoring. I like work that touches both
+        silicon and software the constraints make the design sharper.
+      </p>
+
+      <div class="meta-row">
+        <div class="meta-item"><span class="k" data-i18n="about.age_k">Age</span><span class="v">24</span></div>
+        <div class="meta-item"><span class="k" data-i18n="about.loc_k">Location</span><span class="v" data-i18n="about.loc_v">Abizar Village, Tizi Ouzou</span></div>
+        <div class="meta-item"><span class="k" data-i18n="about.email_k">Email</span><span class="v">Berbersoft@gmail.com</span></div>
+        <div class="meta-item"><span class="k" data-i18n="about.phone_k">Phone</span><span class="v">+213 560 117 221</span></div>
+        <div class="meta-item"><span class="k" data-i18n="about.status_k">Status</span><span class="v" data-i18n="about.status_v">Open to opportunities</span></div>
+        <div class="meta-item"><span class="k" data-i18n="about.mob_k">Mobility</span><span class="v" data-i18n="about.mob_v">EU · Remote · Relocation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow"><span class="dot"></span><span data-i18n="skills.eyebrow">Stack</span></div>
+        <h2 class="sec-title" data-i18n="skills.title">Technical toolkit</h2>
+      </div>
+      <div class="sec-tag" data-i18n="skills.tag">// four domains, one workflow</div>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-card reveal" style="--d:0s; --card-accent: #d4a262;">
+        <div class="skill-head">
+          <h3 data-i18n="skills.embedded" data-i18n-html>Embedded &amp; Hardware</h3>
+          <span class="tag">R1</span>
+        </div>
+        <div class="chips">
+          <span class="chip">Arduino</span>
+          <span class="chip">ESP32</span>
+          <span class="chip">STM32</span>
+          <span class="chip">VHDL</span>
+          <span class="chip" data-i18n="s.chip.mcu">Microcontrollers</span>
+          <span class="chip" data-i18n="s.chip.sensors">Sensors</span>
+          <span class="chip">PWM</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal" style="--d:.08s; --card-accent: #7fd9c4;">
+        <div class="skill-head">
+          <h3 data-i18n="skills.ai" data-i18n-html>AI &amp; Data</h3>
+          <span class="tag">R2</span>
+        </div>
+        <div class="chips">
+          <span class="chip" data-i18n="s.chip.model">Model design</span>
+          <span class="chip">TensorFlow</span>
+          <span class="chip" data-i18n="s.chip.training">Training</span>
+          <span class="chip" data-i18n="s.chip.opti">Optimization</span>
+          <span class="chip" data-i18n="s.chip.deploy">Deployment</span>
+          <span class="chip" data-i18n="s.chip.cv">Computer Vision</span>
+          <span class="chip" data-i18n="s.chip.rtinf">Real-time inference</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal" style="--d:.16s; --card-accent: #b48ee0;">
+        <div class="skill-head">
+          <h3 data-i18n="skills.web" data-i18n-html>Web &amp; Mobile</h3>
+          <span class="tag">R3</span>
+        </div>
+        <div class="chips">
+          <span class="chip">Next.js 15</span>
+          <span class="chip">React 19</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Tailwind CSS</span>
+          <span class="chip" data-i18n="s.chip.android">Android (Kotlin/Java)</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal" style="--d:.24s; --card-accent: #e87a6e;">
+        <div class="skill-head">
+          <h3 data-i18n="skills.tools" data-i18n-html>Tools &amp; Languages</h3>
+          <span class="tag">R4</span>
+        </div>
+        <div class="chips">
+          <span class="chip">C++</span>
+          <span class="chip">Python</span>
+          <span class="chip">Node.js</span>
+          <span class="chip">Kotlin</span>
+          <span class="chip">MATLAB</span>
+          <span class="chip">Simulink</span>
+          <span class="chip">Proteus</span>
+          <span class="chip">Git</span>
+          <span class="chip">Vercel</span>
+          <span class="chip">Netlify</span>
+          <span class="chip">Cloudinary</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow"><span class="dot"></span><span data-i18n="projects.eyebrow">Projects</span></div>
+        <h2 class="sec-title" data-i18n="projects.title">Selected work</h2>
+      </div>
+      <div class="sec-tag" data-i18n="projects.tag">// real builds, real constraints</div>
+    </div>
+
+    <div class="projects">
+      <!-- Project 1: Sign Language -->
+      <article class="project reveal fade-in-up" data-border-beam>
+        <div aria-hidden="true" class="mk-beam-glow"></div>
+        <div aria-hidden="true" class="mk-beam-ring"></div>
+        <div class="project-info">
+          <div class="project-head">
+            <span class="dot"></span>
+            <span class="year">2025</span>
+            <span>·</span>
+            <span data-i18n="p1.type">Master's thesis</span>
+          </div>
+          <h3 class="project-title" data-i18n="p1.title">Real-time Sign Language Translation</h3>
+          <div class="project-org" data-i18n="p1.org">UMMTO National "Innovative Project" label, score 19/20</div>
+          <ul class="project-desc">
+            <li data-i18n="p1.d1">Native Android app with an on-device AI model for real-time recognition of sign language gestures through the smartphone camera, with text output and speech synthesis.</li>
+            <li data-i18n="p1.d2">Trained and optimized the model for live detection, tuning the latency / accuracy trade-off for practical use.</li>
+          </ul>
+          <details class="project-more-wrap">
+            <summary data-i18n="p1.more">Read more</summary>
+            <ul class="project-desc">
+              <li data-i18n="p1.d3">Covers the full pipeline: camera capture, keypoint extraction, on-device inference and bilingual text + speech output.</li>
+            </ul>
+          </details>
+          <div class="project-icons" aria-label="Tech stack">
+            <span class="p-icon" title="Android"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15.5V10M18 15.5V10M4 13.5v4M20 13.5v4M8 15v3.5A2.5 2.5 0 0 0 10.5 21h3a2.5 2.5 0 0 0 2.5-2.5V15"/><circle cx="9" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><path d="M8 3l1.5 1.5M16 3l-1.5 1.5"/></svg></span>
+            <span class="p-icon" title="Kotlin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 3h18L3 21V3Z"/></svg></span>
+            <span class="p-icon" title="Computer Vision"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <span class="p-icon" title="On-device ML"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1.5v4M15 1.5v4M9 18.5v4M15 18.5v4M1.5 9h4M1.5 15h4M18.5 9h4M18.5 15h4"/></svg></span>
+            <span class="p-icon" title="Text-to-Speech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6.5a8 8 0 0 1 0 11"/></svg></span>
+          </div>
+          <div class="project-metrics">
+            <div class="p-metric"><strong>25+</strong><span data-i18n="p1.m1">gestures recognized</span></div>
+            <div class="p-metric"><strong>19/20</strong><span data-i18n="p1.m2">thesis score</span></div>
+            <div class="p-metric"><strong>&lt;200ms</strong><span data-i18n="p1.m3">live inference</span></div>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Android</span>
+            <span class="project-tag">Kotlin</span>
+            <span class="project-tag">Computer Vision</span>
+            <span class="project-tag">On-device ML</span>
+            <span class="project-tag">TTS</span>
+          </div>
+          <div class="project-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span data-i18n="p1.badge">Innovative Project · Nov 2025</span>
+          </div>
+        </div>
+
+        <div class="project-visual" style="--glow-color: rgba(180,142,224,.18);">
+          <div class="glow"></div>
+          <svg viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="phoneGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1c2330"/>
+                <stop offset="100%" stop-color="#0e1218"/>
+              </linearGradient>
+              <linearGradient id="screenGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1a2330"/>
+                <stop offset="100%" stop-color="#0f1419"/>
+              </linearGradient>
+            </defs>
+            <!-- phone body -->
+            <rect x="80" y="20" width="160" height="320" rx="22" fill="url(#phoneGrad1)" stroke="#2a3340" stroke-width="1.5"/>
+            <!-- screen -->
+            <rect x="90" y="38" width="140" height="284" rx="6" fill="url(#screenGrad1)"/>
+            <!-- notch -->
+            <rect x="140" y="42" width="40" height="6" rx="3" fill="#0a0d10"/>
+            <!-- status bar -->
+            <text x="100" y="62" font-family="JetBrains Mono, monospace" font-size="7" fill="#6b7585">9:41</text>
+            <circle cx="215" cy="60" r="2" fill="#7fd9c4"/>
+
+            <!-- camera viewfinder (top of screen) -->
+            <rect x="100" y="72" width="120" height="100" rx="4" fill="#0a0d10" stroke="#d4a262" stroke-width="1"/>
+            <!-- hand silhouette (gesture) -->
+            <g transform="translate(160 130)">
+              <ellipse cx="0" cy="0" rx="22" ry="30" fill="#1c2330" stroke="#b48ee0" stroke-width="1.5" opacity=".9"/>
+              <!-- fingers -->
+              <rect x="-18" y="-38" width="6" height="20" rx="3" fill="#1c2330" stroke="#b48ee0" stroke-width="1"/>
+              <rect x="-9" y="-44" width="6" height="26" rx="3" fill="#1c2330" stroke="#b48ee0" stroke-width="1"/>
+              <rect x="0" y="-42" width="6" height="24" rx="3" fill="#1c2330" stroke="#b48ee0" stroke-width="1"/>
+              <rect x="9" y="-36" width="6" height="18" rx="3" fill="#1c2330" stroke="#b48ee0" stroke-width="1"/>
+              <!-- detection points -->
+              <circle cx="-15" cy="-30" r="2" fill="#7fd9c4"/>
+              <circle cx="-6" cy="-36" r="2" fill="#7fd9c4"/>
+              <circle cx="3" cy="-34" r="2" fill="#7fd9c4"/>
+              <circle cx="12" cy="-28" r="2" fill="#7fd9c4"/>
+              <circle cx="0" cy="0" r="2" fill="#7fd9c4"/>
+              <!-- detection box -->
+              <rect x="-26" y="-50" width="44" height="60" rx="2" fill="none" stroke="#b48ee0" stroke-width="1" stroke-dasharray="2 2" opacity=".7"/>
+            </g>
+            <!-- scanning line -->
+            <line x1="105" y1="92" x2="215" y2="92" stroke="#b48ee0" stroke-width="1" opacity=".5">
+              <animate attributeName="y1" values="80;165;80" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="y2" values="80;165;80" dur="3s" repeatCount="indefinite"/>
+            </line>
+
+            <!-- detected label -->
+            <rect x="100" y="184" width="120" height="32" rx="4" fill="#0a0d10" stroke="#b48ee0" stroke-width="1"/>
+            <text x="108" y="198" font-family="JetBrains Mono, monospace" font-size="9" fill="#7fd9c4">DETECTED</text>
+            <text x="108" y="210" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#e6ecf2">Hello</text>
+
+            <!-- transcript area -->
+            <rect x="100" y="226" width="120" height="86" rx="4" fill="#0a0d10" stroke="#1c2330" stroke-width="1"/>
+            <text x="108" y="240" font-family="JetBrains Mono, monospace" font-size="7" fill="#6b7585">TRANSCRIPT</text>
+            <text x="108" y="256" font-family="Inter, sans-serif" font-size="9" fill="#aab3c0">Hello, how are</text>
+            <text x="108" y="268" font-family="Inter, sans-serif" font-size="9" fill="#aab3c0">you today?</text>
+
+            <!-- speak button -->
+            <circle cx="160" cy="296" r="14" fill="#b48ee0"/>
+            <g transform="translate(160 296)">
+              <path d="M -3 -5 L -3 5 M 3 -5 L 3 5 M -3 -5 L 3 -5 M -3 5 L 3 5" stroke="#0a0d10" stroke-width="1.5" fill="none"/>
+              <path d="M 5 -3 Q 7 0 5 3" stroke="#0a0d10" stroke-width="1.5" fill="none"/>
+              <path d="M -5 -3 Q -7 0 -5 3" stroke="#0a0d10" stroke-width="1.5" fill="none"/>
+            </g>
+
+            <!-- side button -->
+            <rect x="78" y="80" width="2" height="30" rx="1" fill="#2a3340"/>
+            <rect x="240" y="100" width="2" height="40" rx="1" fill="#2a3340"/>
+          </svg>
+        </div>
+      </article>
+
+      <!-- Project 2: IoT & Motor Control -->
+      <article class="project reveal fade-in-up" style="--d:.1s" data-border-beam>
+        <div aria-hidden="true" class="mk-beam-glow"></div>
+        <div aria-hidden="true" class="mk-beam-ring"></div>
+        <div class="project-info">
+          <div class="project-head">
+            <span class="dot"></span>
+            <span class="year">2023</span>
+            <span>·</span>
+            <span data-i18n="p2.type">Bachelor's project</span>
+          </div>
+          <h3 class="project-title" data-i18n-html data-i18n="p2.title">Connected Weather Station &amp; Motor Speed Control</h3>
+          <div class="project-org" data-i18n="p2.org">UMMTO autonomous sensing + real-time control</div>
+          <ul class="project-desc">
+            <li data-i18n="p2.d1" data-i18n-html>Prototyped an autonomous weather station on <strong>ESP32 + DHT22</strong>, with a responsive web interface hosted on the microcontroller streaming real-time environmental data over Wi-Fi.</li>
+            <li data-i18n="p2.d2" data-i18n-html>Modeled and implemented a servo control system on <strong>Arduino</strong> with a speed sensor and <strong>PWM controller</strong> to hold constant speed under varying loads.</li>
+          </ul>
+          <details class="project-more-wrap">
+            <summary data-i18n="p2.more">Read more</summary>
+            <ul class="project-desc">
+              <li data-i18n="p2.d3" data-i18n-html>Combines a low-power sensing node with closed-loop motor control - everything validated on real hardware, not just simulation.</li>
+            </ul>
+          </details>
+          <div class="project-icons" aria-label="Tech stack">
+            <span class="p-icon" title="ESP32"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1.5v4M15 1.5v4M9 18.5v4M15 18.5v4M1.5 9h4M1.5 15h4M18.5 9h4M18.5 15h4"/></svg></span>
+            <span class="p-icon" title="Arduino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21L12 3l7 18"/><path d="M8.5 14h7"/></svg></span>
+            <span class="p-icon" title="DHT22"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a2 2 0 0 0-4 0v9.76a4 4 0 1 0 4 0Z"/></svg></span>
+            <span class="p-icon" title="PWM"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></span>
+            <span class="p-icon" title="IoT"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M5 7v4a4 4 0 0 0 4 4M19 7v4a4 4 0 0 1-4 4M12 13v4"/></svg></span>
+          </div>
+          <div class="project-metrics">
+            <div class="p-metric"><strong>±0.5°C</strong><span data-i18n="p2.m1">sensor accuracy</span></div>
+            <div class="p-metric"><strong>1kHz</strong><span data-i18n="p2.m2">PWM control</span></div>
+            <div class="p-metric"><strong>&lt;3%</strong><span data-i18n="p2.m3">speed error</span></div>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">ESP32</span>
+            <span class="project-tag">Arduino</span>
+            <span class="project-tag">DHT22</span>
+            <span class="project-tag">PWM</span>
+            <span class="project-tag">IoT</span>
+            <span class="project-tag">Wi-Fi</span>
+          </div>
+        </div>
+
+        <div class="project-visual" style="--glow-color: rgba(127,217,196,.15);">
+          <div class="glow"></div>
+          <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="boardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0d3a2d"/>
+                <stop offset="100%" stop-color="#072018"/>
+              </linearGradient>
+              <linearGradient id="chipGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1a2028"/>
+                <stop offset="100%" stop-color="#0e1218"/>
+              </linearGradient>
+            </defs>
+
+            <!-- pcb body -->
+            <rect x="30" y="40" width="300" height="200" rx="8" fill="url(#boardGrad)" stroke="#2f5b48" stroke-width="1.5"/>
+            <!-- pcb traces -->
+            <g stroke="#7fd9c4" stroke-width="1" fill="none" opacity=".4">
+              <path d="M 90 100 L 150 100 L 150 140 L 220 140"/>
+              <path d="M 90 180 L 130 180 L 130 160 L 180 160"/>
+              <path d="M 250 80 L 250 120 L 220 120"/>
+              <path d="M 270 200 L 270 170 L 240 170"/>
+            </g>
+            <!-- solder pads -->
+            <g fill="#d4a262" opacity=".7">
+              <circle cx="150" cy="100" r="2"/>
+              <circle cx="150" cy="140" r="2"/>
+              <circle cx="220" cy="120" r="2"/>
+              <circle cx="130" cy="180" r="2"/>
+              <circle cx="180" cy="160" r="2"/>
+            </g>
+
+            <!-- ESP32 module (top right) -->
+            <g transform="translate(230 70)">
+              <rect x="0" y="0" width="70" height="50" rx="3" fill="url(#chipGrad2)" stroke="#2a3340" stroke-width="1"/>
+              <text x="35" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" fill="#aab3c0" font-weight="600">ESP32</text>
+              <text x="35" y="30" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="5" fill="#6b7585">Wi-Fi · BT</text>
+              <!-- antenna -->
+              <path d="M 70 25 L 80 25" stroke="#d4a262" stroke-width="1.5"/>
+              <path d="M 80 22 Q 86 25 80 28" stroke="#d4a262" stroke-width="1" fill="none"/>
+              <!-- pin pads -->
+              <g fill="#7fd9c4">
+                <rect x="-3" y="8" width="3" height="2"/>
+                <rect x="-3" y="14" width="3" height="2"/>
+                <rect x="-3" y="20" width="3" height="2"/>
+                <rect x="-3" y="26" width="3" height="2"/>
+                <rect x="-3" y="32" width="3" height="2"/>
+                <rect x="70" y="8" width="3" height="2"/>
+                <rect x="70" y="14" width="3" height="2"/>
+                <rect x="70" y="20" width="3" height="2"/>
+                <rect x="70" y="26" width="3" height="2"/>
+                <rect x="70" y="32" width="3" height="2"/>
+              </g>
+              <!-- wifi waves -->
+              <g transform="translate(95 25)" fill="none" stroke="#7fd9c4" stroke-width="1" opacity=".7">
+                <path d="M 0 0 Q 4 -4 8 0"/>
+                <path d="M -2 2 Q 4 -8 10 2"/>
+              </g>
+            </g>
+
+            <!-- DHT22 sensor (top left) -->
+            <g transform="translate(55 65)">
+              <rect x="0" y="0" width="40" height="40" rx="2" fill="url(#chipGrad2)" stroke="#2a3340" stroke-width="1"/>
+              <text x="20" y="18" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="5" fill="#aab3c0" font-weight="600">DHT22</text>
+              <text x="20" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="4" fill="#6b7585">TEMP/HUM</text>
+              <!-- perforation holes -->
+              <g fill="#0a0d10">
+                <rect x="6" y="32" width="3" height="2" rx=".5"/>
+                <rect x="12" y="32" width="3" height="2" rx=".5"/>
+                <rect x="18" y="32" width="3" height="2" rx=".5"/>
+                <rect x="24" y="32" width="3" height="2" rx=".5"/>
+              </g>
+              <!-- humidity waves -->
+              <g transform="translate(20 -10)" fill="none" stroke="#7fd9c4" stroke-width="1" opacity=".6">
+                <path d="M -4 4 Q 0 0 4 4"/>
+                <path d="M -4 2 Q 0 -2 4 2"/>
+              </g>
+            </g>
+
+            <!-- Arduino-style header (left) -->
+            <g transform="translate(45 130)">
+              <rect x="0" y="0" width="15" height="90" rx="2" fill="#0a0d10" stroke="#2a3340" stroke-width="1"/>
+              <g fill="#d4a262">
+                <circle cx="7.5" cy="8" r="2"/>
+                <circle cx="7.5" cy="18" r="2"/>
+                <circle cx="7.5" cy="28" r="2"/>
+                <circle cx="7.5" cy="38" r="2"/>
+                <circle cx="7.5" cy="48" r="2"/>
+                <circle cx="7.5" cy="58" r="2"/>
+                <circle cx="7.5" cy="68" r="2"/>
+                <circle cx="7.5" cy="78" r="2"/>
+              </g>
+            </g>
+            <g transform="translate(70 130)">
+              <rect x="0" y="0" width="15" height="90" rx="2" fill="#0a0d10" stroke="#2a3340" stroke-width="1"/>
+              <g fill="#d4a262">
+                <circle cx="7.5" cy="8" r="2"/>
+                <circle cx="7.5" cy="18" r="2"/>
+                <circle cx="7.5" cy="28" r="2"/>
+                <circle cx="7.5" cy="38" r="2"/>
+                <circle cx="7.5" cy="48" r="2"/>
+                <circle cx="7.5" cy="58" r="2"/>
+                <circle cx="7.5" cy="68" r="2"/>
+                <circle cx="7.5" cy="78" r="2"/>
+              </g>
+            </g>
+
+            <!-- motor driver / PWM chip -->
+            <g transform="translate(120 150)">
+              <rect x="0" y="0" width="60" height="40" rx="3" fill="url(#chipGrad2)" stroke="#d4a262" stroke-width="1"/>
+              <text x="30" y="18" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" fill="#aab3c0" font-weight="600">PWM CTRL</text>
+              <text x="30" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="5" fill="#6b7585">MOTOR · DRV</text>
+              <!-- pin 1 dot -->
+              <circle cx="3" cy="3" r="1.5" fill="#d4a262"/>
+              <g fill="#7fd9c4">
+                <rect x="10" y="-3" width="3" height="2"/>
+                <rect x="20" y="-3" width="3" height="2"/>
+                <rect x="30" y="-3" width="3" height="2"/>
+                <rect x="40" y="-3" width="3" height="2"/>
+                <rect x="10" y="40" width="3" height="2"/>
+                <rect x="20" y="40" width="3" height="2"/>
+                <rect x="30" y="40" width="3" height="2"/>
+                <rect x="40" y="40" width="3" height="2"/>
+              </g>
+            </g>
+
+            <!-- DC motor symbol (right) -->
+            <g transform="translate(240 175)">
+              <circle cx="0" cy="0" r="22" fill="url(#chipGrad2)" stroke="#d4a262" stroke-width="1.5"/>
+              <text x="0" y="3" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6" fill="#d4a262" font-weight="700">M</text>
+              <circle cx="0" cy="0" r="3" fill="#0a0d10"/>
+              <circle cx="0" cy="0" r="1" fill="#d4a262"/>
+              <!-- rotation indicator -->
+              <g stroke="#7fd9c4" stroke-width="1" fill="none" opacity=".6">
+                <path d="M -16 -8 Q -22 0 -16 8"/>
+              </g>
+              <text x="0" y="38" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="5" fill="#6b7585">SERVO</text>
+            </g>
+
+            <!-- ground / power labels -->
+            <g font-family="JetBrains Mono, monospace" font-size="5" fill="#6b7585">
+              <text x="45" y="232">GND</text>
+              <text x="75" y="232">5V</text>
+              <text x="120" y="232">PWM</text>
+              <text x="220" y="232">+12V</text>
+            </g>
+
+            <!-- corner mounting holes -->
+            <g fill="#0a0d10" stroke="#2a3340" stroke-width="1">
+              <circle cx="45" cy="55" r="4"/>
+              <circle cx="315" cy="55" r="4"/>
+              <circle cx="45" cy="225" r="4"/>
+              <circle cx="315" cy="225" r="4"/>
+            </g>
+          </svg>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow"><span class="dot"></span><span data-i18n="edu.eyebrow">Education</span></div>
+        <h2 class="sec-title" data-i18n="edu.title">Academic path</h2>
+      </div>
+      <div class="sec-tag">// 2020 → 2025</div>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item reveal fade-in-up">
+        <div class="t-year">2025</div>
+        <div class="t-title" data-i18n="edu.master">Master's Integrated Systems Electronics</div>
+        <div class="t-sub" data-i18n="edu.univ">Mouloud Mammeri University of Tizi Ouzou (UMMTO), Algeria</div>
+        <div class="t-note" data-i18n="edu.note" data-i18n-html>
+          ENIC-NARIC comparability certificate: <strong>Level 7 (Master)</strong> of the
+          European Qualifications Framework, granting access to doctoral studies
+          and the job market in the field. Master's project scored 19/20 and
+          received the national "Innovative Project" label.
+        </div>
+      </div>
+
+      <div class="t-item reveal fade-in-up" style="--d:.1s">
+        <div class="t-year">2023</div>
+        <div class="t-title" data-i18n="edu.bachelor">Bachelor's Electronics</div>
+        <div class="t-sub" data-i18n="edu.univ">Mouloud Mammeri University of Tizi Ouzou (UMMTO), Algeria</div>
+      </div>
+
+      <div class="t-item reveal fade-in-up" style="--d:.2s">
+        <div class="t-year">2020</div>
+        <div class="t-title" data-i18n="edu.bac">Baccalaureate Mathematics</div>
+        <div class="t-sub" data-i18n="edu.school">Frère Aitbata Secondary School, Timizart</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LANGUAGES / MOBILITY ================= -->
+<section id="info">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow"><span class="dot"></span><span data-i18n="info.eyebrow" data-i18n-html>Languages &amp; mobility</span></div>
+        <h2 class="sec-title" data-i18n="info.title">Where I can work, and how I talk.</h2>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <h3 data-i18n="info.languages">Languages</h3>
+        <div class="lang-row"><span>Kabyle</span><span class="lang-level" data-i18n="info.native">Native</span></div>
+        <div class="lang-row"><span>French</span><span class="lang-level">C1</span></div>
+        <div class="lang-row"><span>English</span><span class="lang-level">C1</span></div>
+        <div class="lang-row"><span>Arabic</span><span class="lang-level" data-i18n="info.proficient">Proficient</span></div>
+      </div>
+      <div class="info-card reveal" style="--d:.1s">
+        <h3 data-i18n="info.mobility">Mobility</h3>
+        <p data-i18n="info.mobility_desc" data-i18n-html>
+          Open to relocation across <strong>Europe</strong> France, Germany,
+          Netherlands and other EU member states. Comfortable completing the
+          necessary visa and residence permit procedures. Also open to
+          <strong>fully remote</strong> roles.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="dot"></span><span data-i18n="contact.eyebrow">Contact</span></div>
+    <h2 class="sec-title reveal" style="--d:.05s; margin-bottom: 32px;" data-i18n="contact.title">
+      Let's build something together.
+    </h2>
+
+    <div class="contact-card reveal" style="--d:.1s">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h2 data-i18n="contact.left_title">Open to embedded, embedded-AI and IoT roles.</h2>
+          <p data-i18n="contact.left_desc" data-i18n-html>
+            Whether you have a position, a freelance project, or just want to
+            talk shop about a microcontroller you can't bring to life drop a
+            line. I usually reply within 24 hours.
+          </p>
+
+          <div class="contact-channels">
+            <a class="channel" href="mailto:Berbersoft@gmail.com">
+              <span class="channel-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              </span>
+              <span>
+                <span class="channel-label" data-i18n="contact.email_label">Email</span>
+                <span class="channel-val">Berbersoft@gmail.com</span>
+              </span>
+            </a>
+            <a class="channel" href="tel:+213560117221">
+              <span class="channel-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span>
+                <span class="channel-label" data-i18n="contact.phone_label">Phone</span>
+                <span class="channel-val">+213 560 117 221</span>
+              </span>
+            </a>
+            <a class="channel" href="https://berbersoft02-portfolio.vercel.app/" target="_blank" rel="noopener">
+              <span class="channel-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
+              <span>
+                <span class="channel-label" data-i18n="contact.web_label">Web</span>
+                <span class="channel-val">berbersoft02-portfolio.vercel.app</span>
+              </span>
+            </a>
+            <div class="channel" style="cursor: default;">
+              <span class="channel-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span>
+                <span class="channel-label" data-i18n="contact.loc_label">Location</span>
+                <span class="channel-val" data-i18n="contact.loc_val">Abizar Village, Tizi Ouzou, Algeria</span>
+              </span>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap: wrap; margin-top: 28px;">
+            <a class="btn btn-solid" href="./public/cvFR%20(3).pdf" download>CV (FR)</a>
+            <a class="btn" href="./public/cv%20(Anglais)%20(1).pdf" download>CV (EN)</a>
+          </div>
+        </div>
+
+        <form class="form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-name" data-i18n="contact.name_label">Name</label>
+              <input id="f-name" name="name" type="text" required autocomplete="name" data-i18n-ph="contact.name_ph" placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="f-email" data-i18n="contact.email_label2">Email</label>
+              <input id="f-email" name="email" type="email" required autocomplete="email" data-i18n-ph="contact.email_ph" placeholder="you@company.com">
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-subject" data-i18n="contact.subject_label">Subject</label>
+            <input id="f-subject" name="subject" type="text" data-i18n-ph="contact.subject_ph" placeholder="Embedded role / freelance / chat…">
+          </div>
+          <div class="field">
+            <label for="f-message" data-i18n="contact.msg_label">Message</label>
+            <textarea id="f-message" name="message" required data-i18n-ph="contact.msg_ph" placeholder="Tell me about the role or the build…"></textarea>
+          </div>
+          <button class="btn btn-solid" type="submit">
+            <span data-i18n="contact.send">Send message</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-i18n-html data-i18n="footer.credit">designed &amp; built by S. Ahrikenchikh</span>
+  <span class="sep">·</span>
+  <span>© <span id="year">2026</span></span>
+  <span class="sep">·</span>
+  <span data-i18n="footer.loc">Algeria · remote · EU</span>
+</footer>
+
+<button id="to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<!-- Three.js, GLTFLoader & User 3D Model Asset (UMD build) for the hero 3D scene.
+     Loaded locally so the page works 100% offline, on file:// URLs, and over web servers. -->
+<script src="./three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+<script src="./GLTFLoader.js"></script>
+<script src="./said_model.js"></script>
+<script>
+/* ================================================================
+   HERO 3D SCENE uses Three.js loaded as a UMD global
+   Parses user's exact 3D board model (said.glb / said_model.js) with golden underglow
+   ================================================================ */
+(function () {
+  const canvas = document.getElementById('hero-3d');
+  if (!canvas) return;
+  if (typeof THREE === 'undefined') {
+    console.error('Three.js failed to load. Check your network connection.');
+    return;
+  }
+
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- renderer ---------- */
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance'
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 200);
+  camera.position.set(0, 3.2, 5.5);
+  camera.lookAt(0, 0.1, 0);
+
+  function fit() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  fit();
+  window.addEventListener('resize', fit);
+
+  /* ---------- lights ---------- */
+  scene.add(new THREE.AmbientLight(0xffffff, 2.5));
+
+  // Frontal Key Light (Directly Illuminates Board Face & Components)
+  const frontLight = new THREE.DirectionalLight(0xfffaed, 5.0);
+  frontLight.position.set(0, 5, 8);
+  scene.add(frontLight);
+
+  // Sky & Ground Hemisphere Light (Brightens 3D Relief Details)
+  const hemi = new THREE.HemisphereLight(0xe2eeff, 0x222c3d, 3.5);
+  scene.add(hemi);
+
+  // Directional Specular Light for Board Component Relief Highlights
+  const dirLight = new THREE.DirectionalLight(0xffffff, 4.2);
+  dirLight.position.set(4, 8, 6);
+  dirLight.castShadow = true;
+  dirLight.shadow.mapSize.width = 1024;
+  dirLight.shadow.mapSize.height = 1024;
+  scene.add(dirLight);
+
+  // Warm Purple Key Light (Primary Shadow Caster)
+  const key = new THREE.PointLight(0x9a8afb, 4.5, 30, 1.4);
+  key.position.set(3, 6, 4);
+  key.castShadow = true;
+  key.shadow.mapSize.width = 1024;
+  key.shadow.mapSize.height = 1024;
+  key.shadow.camera.near = 0.5;
+  key.shadow.camera.far = 15;
+  key.shadow.bias = -0.001;
+  scene.add(key);
+
+  // Cool Lavender Fill Light (Atmospheric Specular Rim)
+  const fill = new THREE.PointLight(0xc2bcd2, 2.5, 25, 1.6);
+  fill.position.set(-5, 2, -3);
+  scene.add(fill);
+
+  /* ---------- 5 IN-BOARD SURFACE LIGHTS (Center + 4 Board Corners) ---------- */
+  // 1. Intense Center Surface Light
+  const centerLight = new THREE.PointLight(0x7b6ad4, 8.5, 6.5, 1.1);
+  centerLight.position.set(0, 0.22, 0);
+  scene.add(centerLight);
+
+  // 2. 4 In-Board Surface Lights placed directly on the board surface corners to reveal all trace lines
+  const boardCornerLights = [
+    { x: -1.0, y: 0.22, z: -0.85, color: 0x9a8afb, intensity: 6.5 }, // Top-Left Board Corner
+    { x:  1.0, y: 0.22, z: -0.85, color: 0xb8abff, intensity: 6.5 }, // Top-Right Board Corner
+    { x: -1.0, y: 0.22, z:  0.85, color: 0x6b5ab8, intensity: 6.5 }, // Bottom-Left Board Corner
+    { x:  1.0, y: 0.22, z:  0.85, color: 0xc2bcd2, intensity: 5.5 }  // Bottom-Right Board Corner
+  ];
+
+  boardCornerLights.forEach(function (cfg) {
+    const light = new THREE.PointLight(cfg.color, cfg.intensity, 4.8, 1.2);
+    light.position.set(cfg.x, cfg.y, cfg.z);
+    scene.add(light);
+  });
+
+  /* ---------- dark grid floor with glowing nodes ---------- */
+  const floorGroup = new THREE.Group();
+  scene.add(floorGroup);
+  {
+    const planeGeo = new THREE.PlaneGeometry(50, 50);
+    const planeMat = new THREE.MeshStandardMaterial({ color: 0x040508, metalness: 0.4, roughness: 0.6 });
+    const plane = new THREE.Mesh(planeGeo, planeMat);
+    plane.rotation.x = -Math.PI / 2;
+    plane.position.y = -0.5;
+    floorGroup.add(plane);
+
+    const gridSize = 28, gridDiv = 28;
+    const verts = [];
+    const step = gridSize / gridDiv;
+    for (let i = 0; i <= gridDiv; i++) {
+      const p = -gridSize / 2 + i * step;
+      verts.push(p, 0, -gridSize / 2, p, 0, gridSize / 2);
+      verts.push(-gridSize / 2, 0, p, gridSize / 2, 0, p);
+    }
+    const gridGeo = new THREE.BufferGeometry();
+    gridGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+    const gridMat = new THREE.LineBasicMaterial({ color: 0x9a8afb, transparent: true, opacity: 0.08 });
+    const grid = new THREE.LineSegments(gridGeo, gridMat);
+    grid.position.y = -0.49;
+    floorGroup.add(grid);
+
+    // Glowing grid intersection nodes
+    const nodePositions = [];
+    const nodeColors = [];
+    const colorObj = new THREE.Color(0x9a8afb);
+    for (let i = 1; i < gridDiv; i++) {
+      for (let j = 1; j < gridDiv; j++) {
+        if (Math.random() > 0.55) {
+          const x = -gridSize / 2 + i * step;
+          const z = -gridSize / 2 + j * step;
+          if (Math.hypot(x, z) > 2.2) {
+            nodePositions.push(x, -0.485, z);
+            nodeColors.push(colorObj.r, colorObj.g, colorObj.b);
+          }
+        }
+      }
+    }
+    const nodeGeo = new THREE.BufferGeometry();
+    nodeGeo.setAttribute('position', new THREE.Float32BufferAttribute(nodePositions, 3));
+    nodeGeo.setAttribute('color', new THREE.Float32BufferAttribute(nodeColors, 3));
+    const nodeMat = new THREE.PointsMaterial({
+      size: 0.04, vertexColors: true, transparent: true, opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+    const nodes = new THREE.Points(nodeGeo, nodeMat);
+    floorGroup.add(nodes);
+  }
+
+  /* ---------- concentric floor circuit rings ---------- */
+  const orbitRings = [];
+  for (let i = 0; i < 4; i++) {
+    const r = 2.4 + i * 0.6;
+    const ringGeo = new THREE.RingGeometry(r, r + 0.015, 96);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0x9a8afb, transparent: true, opacity: 0.35 - i * 0.07, side: THREE.DoubleSide
+    });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.y = -0.47;
+    scene.add(ring);
+    orbitRings.push(ring);
+  }
+
+  /* ---------- USER CUSTOM 3D GLB MICROCONTROLLER BOARD ---------- */
+  const chipGroup = new THREE.Group();
+  chipGroup.position.set(0, -0.05, 0);
+  chipGroup.rotation.x = 0; // Original flat position as requested
+  scene.add(chipGroup);
+
+  function createProceduralFallback() {
+    // 1. PCB Substrate Base
+    const pcbGeo = new THREE.BoxGeometry(3.0, 0.1, 2.0);
+    const pcbMat = new THREE.MeshPhongMaterial({
+      color: 0x242c3b, emissive: 0x0e141f, specular: 0x667799, shininess: 35, side: THREE.DoubleSide
+    });
+    const pcb = new THREE.Mesh(pcbGeo, pcbMat);
+    pcb.position.y = 0.05;
+    chipGroup.add(pcb);
+
+    // PCB Golden Bevel Rim Accent
+    const rimGeo = new THREE.BoxGeometry(3.04, 0.03, 2.04);
+    const rimMat = new THREE.MeshStandardMaterial({
+      color: 0xffa844, emissive: 0xff6600, emissiveIntensity: 1.5, metalness: 0.95, roughness: 0.1
+    });
+    const rim = new THREE.Mesh(rimGeo, rimMat);
+    rim.position.y = 0.01;
+    chipGroup.add(rim);
+
+    // 2. Central STM32 ARM Microcontroller Package
+    const mcuGeo = new THREE.BoxGeometry(1.2, 0.08, 1.2);
+    const mcuMat = new THREE.MeshPhongMaterial({
+      color: 0x354054, emissive: 0x141a26, specular: 0xffffff, shininess: 60
+    });
+    const mcu = new THREE.Mesh(mcuGeo, mcuMat);
+    mcu.position.y = 0.14;
+    chipGroup.add(mcu);
+
+    // STM32 Laser-Etched Text Canvas Texture
+    const cvs = document.createElement('canvas');
+    cvs.width = 512; cvs.height = 512;
+    const ctx = cvs.getContext('2d');
+    ctx.fillStyle = '#1e2634'; ctx.fillRect(0, 0, 512, 512);
+    ctx.strokeStyle = '#ffa844'; ctx.lineWidth = 8; ctx.strokeRect(16, 16, 480, 480);
+    ctx.fillStyle = '#ffa844'; ctx.font = '700 110px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('STM32', 256, 200);
+    ctx.fillStyle = '#9aa8bd'; ctx.font = '600 32px "JetBrains Mono", monospace';
+    ctx.fillText('ARM CORTEX-M4', 256, 310);
+    ctx.fillStyle = '#7fd9c4'; ctx.fillText('168MHz · 512KB', 256, 380);
+    ctx.fillStyle = '#ffa844'; ctx.beginPath(); ctx.arc(60, 60, 14, 0, Math.PI*2); ctx.fill();
+
+    const mcuTex = new THREE.CanvasTexture(cvs);
+    if (THREE.SRGBColorSpace) mcuTex.colorSpace = THREE.SRGBColorSpace;
+    const mcuLabel = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.16, 1.16),
+      new THREE.MeshBasicMaterial({ map: mcuTex, side: THREE.DoubleSide })
+    );
+    mcuLabel.rotation.x = -Math.PI / 2;
+    mcuLabel.position.y = 0.185;
+    chipGroup.add(mcuLabel);
+
+    // 3. Double Row of Golden Header Contact Pins
+    const pinMat = new THREE.MeshStandardMaterial({
+      color: 0xffc86b, emissive: 0xff7700, emissiveIntensity: 1.2, metalness: 0.95, roughness: 0.1
+    });
+    for (let i = 0; i < 20; i++) {
+      const x = -1.35 + (i / 19) * 2.7;
+      [-0.85, 0.85].forEach(function (z) {
+        const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.18, 8), pinMat);
+        pin.position.set(x, 0.12, z);
+        chipGroup.add(pin);
+      });
+    }
+
+    // 4. USB-C Port & Status LEDs
+    const usbMat = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9, roughness: 0.1 });
+    const usb = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.14, 0.5), usbMat);
+    usb.position.set(-1.25, 0.12, 0);
+    chipGroup.add(usb);
+
+    const ledMat1 = new THREE.MeshBasicMaterial({ color: 0x00ff88 });
+    const led1 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.08), ledMat1);
+    led1.position.set(1.2, 0.12, 0.6);
+    chipGroup.add(led1);
+
+    const ledMat2 = new THREE.MeshBasicMaterial({ color: 0x00e5ff });
+    const led2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.08), ledMat2);
+    led2.position.set(1.2, 0.12, -0.6);
+    chipGroup.add(led2);
+  }
+
+  function setupModel(model) {
+    // Orient model 90° so its front face (MCU chip, pin headers, USB jack) faces the camera
+    model.rotation.x = Math.PI / 2;
+
+    // Auto-center and fit model into scene regardless of raw unit bounds
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 2.8 / (maxDim || 1);
+    model.scale.set(scale, scale, scale);
+
+    const center = box.getCenter(new THREE.Vector3());
+    model.position.x = -center.x * scale;
+    model.position.y = -center.y * scale + 0.1;
+    model.position.z = -center.z * scale;
+
+    model.traverse(function (node) {
+      if (node.isMesh) {
+        node.castShadow = true;
+        node.receiveShadow = true;
+        if (node.geometry) {
+          node.geometry.computeVertexNormals();
+        }
+        if (node.material) {
+          // Preserve original Substance 3D Painter texture maps (baseColor, normalMap, roughness/metallic)
+          node.material.side = THREE.DoubleSide;
+          node.material.needsUpdate = true;
+
+          if (node.material.map) {
+            // Keep full authentic texture colors from Substance 3D Painter
+            node.material.color.setHex(0xffffff);
+          }
+        }
+      }
+    });
+
+    chipGroup.add(model);
+  }
+
+  const loaderClass = THREE.GLTFLoader || (window.THREE && window.THREE.GLTFLoader);
+  const dracoClass = THREE.DRACOLoader || (window.THREE && window.THREE.DRACOLoader);
+
+  function getLoader() {
+    const loader = new loaderClass();
+    if (dracoClass) {
+      const dracoLoader = new dracoClass();
+      dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+      loader.setDRACOLoader(dracoLoader);
+    }
+    return loader;
+  }
+
+  if (loaderClass && window.SAID_GLB_DATA_URI) {
+    fetch(window.SAID_GLB_DATA_URI)
+      .then(function (res) { return res.arrayBuffer(); })
+      .then(function (buffer) {
+        const loader = getLoader();
+        loader.parse(buffer, '', function (gltf) {
+          setupModel(gltf.scene);
+        }, function (err) {
+          console.error('Data URI GLB parse error:', err);
+          createProceduralFallback();
+        });
+      })
+      .catch(function (err) {
+        console.error('Data URI fetch error:', err);
+        createProceduralFallback();
+      });
+  } else if (loaderClass) {
+    const loader = getLoader();
+    loader.load('./said_compressed.glb', function (gltf) {
+      setupModel(gltf.scene);
+    }, undefined, function (err) {
+      console.warn('said_compressed.glb load error, loading said.glb fallback:', err);
+      loader.load('./said.glb', function (gltf) {
+        setupModel(gltf.scene);
+      }, undefined, createProceduralFallback);
+    });
+  } else {
+    createProceduralFallback();
+  }
+
+  /* ---------- PCB surface traces & pulses ---------- */
+  const pcbGroup = new THREE.Group();
+  scene.add(pcbGroup);
+  {
+    const traceMat = new THREE.MeshBasicMaterial({ color: 0x9a8afb, transparent: true, opacity: 0.5 });
+    const pulseMat = new THREE.MeshBasicMaterial({ color: 0xffe2b3 });
+    const pulseGeo = new THREE.BoxGeometry(0.035, 0.035, 0.035);
+    window.tracePulses = [];
+    for (let i = 0; i < 16; i++) {
+      const ang = (i / 16) * Math.PI * 2;
+      const r1 = 1.25, r2 = 1.9 + Math.random() * 0.4;
+      const p1 = new THREE.Vector3(Math.cos(ang) * r1, -0.05, Math.sin(ang) * r1);
+      const p2 = new THREE.Vector3(Math.cos(ang) * r2, -0.05, Math.sin(ang) * r2);
+      const mid = new THREE.Vector3(
+        Math.cos(ang) * (r1 + (r2 - r1) * 0.5) + (Math.random() - 0.5) * 0.15,
+        -0.05,
+        Math.sin(ang) * (r1 + (r2 - r1) * 0.5) + (Math.random() - 0.5) * 0.15
+      );
+      const geo = new THREE.BufferGeometry().setFromPoints([p1, mid, p2]);
+      pcbGroup.add(new THREE.Line(geo, traceMat));
+
+      const pulseMesh = new THREE.Mesh(pulseGeo, pulseMat);
+      pulseMesh.position.copy(p1);
+      pcbGroup.add(pulseMesh);
+
+      window.tracePulses.push({
+        mesh: pulseMesh,
+        points: [p1, mid, p2],
+        progress: Math.random(),
+        speed: 0.25 + Math.random() * 0.35
+      });
+    }
+  }
+
+  /* ---------- HOLOGRAPHIC 3D SKILL RECTANGLES ---------- */
+  const skillDefs = [
+    { label: 'STM32', sub: 'EMBEDDED', borderColor: '#9a8afb' },
+    { label: 'ESP32', sub: 'IOT / WI-FI', borderColor: '#c2bcd2' },
+    { label: 'Arduino', sub: 'MCU', borderColor: '#38bdf8' },
+    { label: 'C / C++', sub: 'FIRMWARE', borderColor: '#5b9bd5' },
+    { label: 'Python', sub: 'AI / ML', borderColor: '#ffd43b' },
+    { label: 'TensorFlow', sub: 'AI / ML', borderColor: '#ff6f00' },
+    { label: 'Kotlin', sub: 'ANDROID', borderColor: '#c084fc' },
+    { label: 'Next.js 15', sub: 'WEB', borderColor: '#c2bcd2' },
+    { label: 'React 19', sub: 'FRONTEND', borderColor: '#38bdf8' },
+    { label: 'TypeScript', sub: 'LANG', borderColor: '#60a5fa' },
+    { label: 'MATLAB', sub: 'COMPUTING', borderColor: '#ff8a5c' },
+    { label: 'Simulink', sub: 'SIMULATION', borderColor: '#ff8a3d' },
+    { label: 'Proteus', sub: 'HW SIM', borderColor: '#fb7185' },
+    { label: 'VHDL', sub: 'FPGA', borderColor: '#9a8afb' },
+    { label: 'Deep Learning', sub: 'ON-DEVICE AI', borderColor: '#f472b6' },
+    { label: 'Git', sub: 'DEV TOOLS', borderColor: '#f05032' }
+  ];
+
+  function makeSkillBadgeTexture(s) {
+    const W = 384, H = 192;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const ctx = c.getContext('2d');
+    const r = 24;
+
+    // Sleek dark glassmorphic fill
+    ctx.fillStyle = 'rgba(10, 14, 22, 0.82)';
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.arcTo(W, 0, W, H, r);
+    ctx.arcTo(W, H, 0, H, r);
+    ctx.arcTo(0, H, 0, 0, r);
+    ctx.arcTo(0, 0, W, 0, r);
+    ctx.closePath();
+    ctx.fill();
+
+    // Subtle neon border accent
+    ctx.strokeStyle = s.borderColor;
+    ctx.lineWidth = 4;
+    ctx.shadowColor = s.borderColor;
+    ctx.shadowBlur = 14;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Subtitle category tag
+    ctx.fillStyle = s.borderColor;
+    ctx.font = '600 18px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('[' + s.sub + ']', W / 2, 46);
+
+    // Main skill label
+    ctx.fillStyle = '#ffffff';
+    let fontSize = 40;
+    ctx.font = '700 ' + fontSize + 'px "Nohemi", sans-serif';
+    while (ctx.measureText(s.label).width > W * 0.82 && fontSize > 18) {
+      fontSize -= 2;
+      ctx.font = '700 ' + fontSize + 'px "Nohemi", sans-serif';
+    }
+    ctx.shadowColor = 'rgba(0,0,0,0.8)';
+    ctx.shadowBlur = 8;
+    ctx.fillText(s.label, W / 2, H / 2 + 16);
+
+    const tex = new THREE.CanvasTexture(c);
+    if (THREE.SRGBColorSpace) tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+
+  // Border-beam: a traveling, hue-shifting glow that sweeps around each badge's border.
+  // Ported from the shadcn "border-beam" component to a GLSL shader on a coplanar plane.
+  const beamVertexShader = [
+    'varying vec2 vUv;',
+    'void main() {',
+    '  vUv = uv;',
+    '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
+    '}'
+  ].join('\n');
+
+  const beamFragmentShader = [
+    'uniform float uTime;',
+    'uniform float uHueOffset;',
+    'varying vec2 vUv;',
+    '',
+    'const float HW = 0.5;',
+    'const float A = 0.49;',
+    'const float B = 0.24;',
+    'const float R = 0.0524;',
+    'const float RO = 0.0624;',
+    'const float RI = 0.0424;',
+    'const float PI = 3.14159265359;',
+    'const float TAU = 6.28318530718;',
+    '',
+    'float sdRoundRect(vec2 p, vec2 b, float r) {',
+    '  vec2 q = abs(p) - b + r;',
+    '  return min(max(q.x, q.y), 0.0) + length(max(q, 0.0)) - r;',
+    '}',
+    '',
+    'vec3 hsv2rgb(vec3 c) {',
+    '  vec3 p = abs(fract(c.xxx + vec3(0.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0);',
+    '  return c.z * mix(vec3(1.0), clamp(p - 1.0, 0.0, 1.0), c.y);',
+    '}',
+    '',
+    'float centerlineArc(vec2 p) {',
+    '  float q = A - R;',
+    '  float h = B - R;',
+    '  float a90 = 1.57079632679 * R;',
+    '  float L1 = h;',
+    '  float L2 = L1 + a90;',
+    '  float L3 = L2 + 2.0 * q;',
+    '  float L4 = L3 + a90;',
+    '  float L5 = L4 + 2.0 * h;',
+    '  float L6 = L5 + a90;',
+    '  float L7 = L6 + 2.0 * q;',
+    '  float L8 = L7 + a90;',
+    '  float P = L8 + h;',
+    '',
+    '  vec2 lo = vec2(-q, -h);',
+    '  vec2 hi = vec2(q, h);',
+    '  vec2 cc = clamp(p, lo, hi);',
+    '  vec2 d = p - cc;',
+    '  float dl = length(d);',
+    '  vec2 cp = cc + d * (R / max(dl, 1e-5));',
+    '',
+    '  float s;',
+    '  if (cp.y > hi.y) {',
+    '    if (cp.x > hi.x) {',
+    '      vec2 dc = cp - vec2(hi.x, hi.y);',
+    '      float ang = atan(dc.y, dc.x);',
+    '      s = L1 + ang * R;',
+    '    } else if (cp.x < lo.x) {',
+    '      vec2 dc = cp - vec2(lo.x, hi.y);',
+    '      float ang = atan(dc.y, dc.x);',
+    '      s = L3 + (ang - 1.57079632679) * R;',
+    '    } else {',
+    '      s = L3 + (hi.x - cp.x);',
+    '    }',
+    '  } else if (cp.y < lo.y) {',
+    '    if (cp.x > hi.x) {',
+    '      vec2 dc = cp - vec2(hi.x, lo.y);',
+    '      float ang = atan(dc.y, dc.x);',
+    '      s = L7 + (ang + 1.57079632679) * R;',
+    '    } else if (cp.x < lo.x) {',
+    '      vec2 dc = cp - vec2(lo.x, lo.y);',
+    '      float ang = atan(dc.y, dc.x);',
+    '      float aa = ang < 0.0 ? ang + TAU : ang;',
+    '      s = L5 + (aa - 3.14159265359) * R;',
+    '    } else {',
+    '      s = L7 + (cp.x - lo.x);',
+    '    }',
+    '  } else {',
+    '    if (cp.x > 0.0) {',
+    '      if (cp.y >= 0.0) {',
+    '        s = cp.y;',
+    '      } else {',
+    '        s = L8 + (cp.y - lo.y);',
+    '      }',
+    '    } else {',
+    '      s = L5 + (hi.y - cp.y);',
+    '    }',
+    '  }',
+    '  return mod(s, P);',
+    '}',
+    '',
+    'void main() {',
+    '  vec2 p = vec2(vUv.x - 0.5, (vUv.y - 0.5) * HW);',
+    '',
+    '  float dOuter = sdRoundRect(p, vec2(0.5, 0.25), RO);',
+    '  float dInner = sdRoundRect(p, vec2(0.48, 0.23), RI);',
+    '  float band = smoothstep(0.0, 0.002, -dOuter) * smoothstep(0.0, 0.002, dInner);',
+    '',
+    '  float P = 4.0 * A + 4.0 * B - 8.0 * R + TAU * R;',
+    '  float s = centerlineArc(p);',
+    '  float beamPos = mod(uTime * 0.7, P);',
+    '  float circ = abs(mod(s - beamPos + P, P));',
+    '  if (circ > P * 0.5) circ = P - circ;',
+    '',
+    '  float head = exp(-circ * 16.0);',
+    '  float tail = exp(-circ * 5.0) * 0.35;',
+    '',
+    '  float hue = fract(uTime * 0.1 + uHueOffset);',
+    '  vec3 tint = hsv2rgb(vec3(hue, 0.85, 1.0));',
+    '',
+    '  vec3 col = tint * (head + tail);',
+    '  col += vec3(head * head * 0.7);',
+    '',
+    '  float alpha = clamp(0.15 + (head + tail) * 1.5, 0.0, 1.0);',
+    '  gl_FragColor = vec4(col, alpha * band);',
+    '}'
+  ].join('\n');
+
+  const skillBadges = [];
+  const skillRadius = 3.6;
+  skillDefs.forEach(function (s, i) {
+    const angle = (i / skillDefs.length) * Math.PI * 2;
+    const x = Math.cos(angle) * skillRadius;
+    const z = Math.sin(angle) * skillRadius;
+    const y = 0.3 + Math.sin(i * 1.5) * 0.55;
+
+    const tex = makeSkillBadgeTexture(s);
+    const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0.9, side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.425), mat);
+    mesh.position.set(x, y, z);
+    mesh.lookAt(camera.position.x, y, camera.position.z);
+
+    const beamMat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 }, uHueOffset: { value: i * 0.16 } },
+      vertexShader: beamVertexShader,
+      fragmentShader: beamFragmentShader,
+      transparent: true,
+      depthWrite: false,
+      side: THREE.DoubleSide
+    });
+    const beamMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.425), beamMat);
+    beamMesh.renderOrder = 1;
+    mesh.add(beamMesh);
+
+    mesh.userData = {
+      baseAng: angle,
+      baseY: y,
+      baseDist: skillRadius,
+      phase: i * 0.4,
+      beam: beamMat
+    };
+    scene.add(mesh);
+    skillBadges.push(mesh);
+  });
+
+  /* ---------- ENABLE SHADOWS ACROSS ALL MESHES ---------- */
+  scene.traverse(function (node) {
+    if (node.isMesh) {
+      if (node.geometry && node.geometry.type === 'PlaneGeometry' && node.position.y < -0.4) {
+        node.receiveShadow = true;
+        node.castShadow = false;
+      } else {
+        node.castShadow = true;
+        node.receiveShadow = true;
+      }
+    }
+  });
+
+  function makeParticles(count, hex, size, opacity, distMin, distMax) {
+    const positions = new Float32Array(count * 3);
+    const colorObj = new THREE.Color(hex);
+    const colors = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = distMin + Math.random() * (distMax - distMin);
+      const t = Math.random() * Math.PI * 2;
+      const p = (Math.random() - 0.5) * Math.PI * 0.8;
+      positions[i*3]   = r * Math.cos(p) * Math.cos(t);
+      positions[i*3+1] = r * Math.sin(p) * 0.5 + 0.5;
+      positions[i*3+2] = r * Math.cos(p) * Math.sin(t);
+      colors[i*3] = colorObj.r; colors[i*3+1] = colorObj.g; colors[i*3+2] = colorObj.b;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    const mat = new THREE.PointsMaterial({
+      size: size, vertexColors: true, transparent: true, opacity: opacity,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    return new THREE.Points(geo, mat);
+  }
+  const goldenParticles = makeParticles(600, 0x9a8afb, 0.035, 0.85, 2.5, 14);
+  scene.add(goldenParticles);
+  const cyanParticles = makeParticles(150, 0xc2bcd2, 0.03, 0.65, 2, 10);
+  scene.add(cyanParticles);
+
+  /* ---------- floating light orbs ---------- */
+  function makeGlowTexture() {
+    const c = document.createElement('canvas');
+    c.width = c.height = 128;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    g.addColorStop(0, 'rgba(255,255,255,1)');
+    g.addColorStop(0.25, 'rgba(255,255,255,0.5)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, 128, 128);
+    return new THREE.CanvasTexture(c);
+  }
+  const glowTex = makeGlowTexture();
+  const floatingOrbs = [];
+  const orbPalette = [0xffe2b3, 0x9a8afb, 0xc2bcd2, 0xffb3a3, 0x8fb8ff, 0xffd9a0];
+  for (let i = 0; i < 6; i++) {
+    const color = orbPalette[i % orbPalette.length];
+    const group = new THREE.Group();
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(0.06, 16, 16),
+      new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.9 })
+    );
+    const halo = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: glowTex, color: color, transparent: true, opacity: 0.7,
+        blending: THREE.AdditiveBlending, depthWrite: false
+      })
+    );
+    halo.scale.set(0.55, 0.55, 1);
+    group.add(core);
+    group.add(halo);
+    group.userData = {
+      angle: (i / 6) * Math.PI * 2 + i * 0.4,
+      radius: 1.9 + (i % 3) * 0.4,
+      baseY: -0.4 + (i % 4) * 0.5,
+      speed: 0.10 + (i % 3) * 0.04,
+      bobSpeed: 0.5 + (i % 4) * 0.15,
+      phase: i * 1.3,
+      bobAmp: 0.18 + (i % 2) * 0.08
+    };
+    if (i < 3) {
+      const pl = new THREE.PointLight(color, 0.35, 3.5);
+      group.add(pl);
+    }
+    scene.add(group);
+    floatingOrbs.push(group);
+  }
+
+  /* ---------- interaction (mouse parallax + drag rotate) ---------- */
+  let rotY = 0, rotX = 0;
+  let tgtY = 0, tgtX = 0;
+  let dragging = false, lastX = 0, lastY = 0, lastT = 0;
+  let velY = 0, velX = 0;
+  let mNX = 0, mNY = 0;
+
+  canvas.addEventListener('pointerdown', function (e) {
+    dragging = true; lastX = e.clientX; lastY = e.clientY; lastT = performance.now();
+    velX = velY = 0;
+    try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+    canvas.style.cursor = 'grabbing';
+  });
+  function endDrag() { dragging = false; canvas.style.cursor = 'grab'; }
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('pointermove', function (e) {
+    const r = canvas.getBoundingClientRect();
+    mNX = (e.clientX - r.left) / r.width - 0.5;
+    mNY = (e.clientY - r.top) / r.height - 0.5;
+    if (!dragging) return;
+    const now = performance.now();
+    const dt = Math.max(1, now - lastT);
+    const dx = e.clientX - lastX, dy = e.clientY - lastY;
+    tgtY += dx * 0.005;
+    tgtX += dy * 0.0035;
+    tgtX = Math.max(-0.6, Math.min(0.5, tgtX));
+    velY = (dx * 0.005) / dt;
+    velX = (dy * 0.0035) / dt;
+    lastX = e.clientX; lastY = e.clientY; lastT = now;
+  });
+
+  canvas.style.cursor = 'grab';
+
+  /* ---------- camera keyframes for scroll ---------- */
+  const cameraKeyframes = [
+    { pct: 0.0, pos: new THREE.Vector3(0, 3.2, 5.5), look: new THREE.Vector3(0, 0.1, 0) },
+    { pct: 0.35, pos: new THREE.Vector3(1.8, 2.2, 4.0), look: new THREE.Vector3(0.3, 0.2, 0) },
+    { pct: 0.7, pos: new THREE.Vector3(-1.6, 3.6, 2.0), look: new THREE.Vector3(0, 0.1, 0) },
+    { pct: 1.0, pos: new THREE.Vector3(0, 1.3, 2.6), look: new THREE.Vector3(0, 0.2, 0) }
+  ];
+
+  const currentCamPos = new THREE.Vector3(0, 3.2, 5.5);
+  const currentCamLook = new THREE.Vector3(0, 0.1, 0);
+
+  function getScrollKeyframe(pct) {
+    if (pct <= cameraKeyframes[0].pct) return { pos: cameraKeyframes[0].pos.clone(), look: cameraKeyframes[0].look.clone() };
+    if (pct >= cameraKeyframes[cameraKeyframes.length - 1].pct) {
+      return { 
+        pos: cameraKeyframes[cameraKeyframes.length - 1].pos.clone(), 
+        look: cameraKeyframes[cameraKeyframes.length - 1].look.clone() 
+      };
+    }
+    for (let i = 0; i < cameraKeyframes.length - 1; i++) {
+      const k1 = cameraKeyframes[i];
+      const k2 = cameraKeyframes[i + 1];
+      if (pct >= k1.pct && pct <= k2.pct) {
+        const t = (pct - k1.pct) / (k2.pct - k1.pct);
+        const pos = new THREE.Vector3().lerpVectors(k1.pos, k2.pos, t);
+        const look = new THREE.Vector3().lerpVectors(k1.look, k2.look, t);
+        return { pos, look };
+      }
+    }
+    return { pos: cameraKeyframes[0].pos.clone(), look: cameraKeyframes[0].look.clone() };
+  }
+
+  /* ---------- animation loop ---------- */
+  const t0 = performance.now();
+  let lastTime = t0;
+  function tick() {
+    const nowTime = performance.now();
+    const t = (nowTime - t0) / 1000;
+    const dt = Math.min(0.1, (nowTime - lastTime) / 1000);
+    lastTime = nowTime;
+
+    if (dragging) {
+      rotX += (tgtX - rotX) * 0.15;
+      rotY += (tgtY - rotY) * 0.15;
+    } else {
+      tgtY += velY;
+      velY *= 0.96;
+      rotX += (tgtX - rotX) * 0.05;
+      rotY += (tgtY - rotY) * 0.05;
+    }
+    scene.rotation.y = mNX * 0.05 + (dragging ? rotY * 0.3 : rotY * 0.05);
+    scene.rotation.x = -mNY * 0.03 + (dragging ? rotX * 0.2 : rotX * 0.05);
+
+    // Scroll-based camera interpolation
+    const scrollPct = window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const targets = getScrollKeyframe(scrollPct);
+    currentCamPos.lerp(targets.pos, 0.05);
+    currentCamLook.lerp(targets.look, 0.05);
+    camera.position.copy(currentCamPos);
+    camera.lookAt(currentCamLook);
+
+    // Trace pulses animation
+    if (window.tracePulses) {
+      window.tracePulses.forEach(function (p) {
+        p.progress += p.speed * dt;
+        if (p.progress >= 1.0) {
+          p.progress = 0;
+          p.speed = 0.25 + Math.random() * 0.35;
+        }
+        let pos;
+        if (p.progress < 0.5) {
+          const tPulse = p.progress * 2;
+          pos = new THREE.Vector3().lerpVectors(p.points[0], p.points[1], tPulse);
+        } else {
+          const tPulse = (p.progress - 0.5) * 2;
+          pos = new THREE.Vector3().lerpVectors(p.points[1], p.points[2], tPulse);
+        }
+        p.mesh.position.copy(pos);
+        const s = 0.6 + Math.sin(t * 10 + p.progress * Math.PI) * 0.3;
+        p.mesh.scale.set(s, s, s);
+      });
+    }
+
+    skillBadges.forEach(function (b) {
+      const u = b.userData;
+      const ang = u.baseAng + t * 0.04;
+      b.position.x = Math.cos(ang) * u.baseDist;
+      b.position.z = Math.sin(ang) * u.baseDist;
+      b.position.y = u.baseY + Math.sin(t * 0.8 + u.phase) * 0.15;
+      b.lookAt(camera.position.x, b.position.y, camera.position.z);
+      if (u.beam) u.beam.uniforms.uTime.value = t;
+    });
+
+    // Skill badge pulse on proximity to mouse
+    skillBadges.forEach(function(badge, i) {
+      const dist = Math.hypot(badge.position.x - mNX * 2, badge.position.z - mNY * 2);
+      const pulse = 1 + Math.sin(Date.now() * 0.003 + i * 0.5) * 0.08;
+      const proximity = Math.max(0, 1 - dist / 4);
+      badge.scale.setScalar((1 + proximity * 0.25) * pulse);
+      if (badge.material) {
+        badge.material.emissiveIntensity = 0.4 + proximity * 0.6;
+      }
+    });
+
+    orbitRings.forEach(function (r, i) {
+      const s = 1 + Math.sin(t * 1.0 + i * 0.5) * 0.015;
+      r.scale.set(s, s, 1);
+      r.material.opacity = (0.35 - i * 0.07) * (0.7 + Math.sin(t * 1.2 + i) * 0.3);
+    });
+
+    centerLight.intensity = 7.5 + Math.sin(t * 1.8) * 1.5;
+
+    goldenParticles.rotation.y = t * 0.02;
+    cyanParticles.rotation.y = -t * 0.015;
+
+    floatingOrbs.forEach(function (o) {
+      const u = o.userData;
+      const ang = u.angle + t * u.speed;
+      o.position.x = Math.cos(ang) * u.radius;
+      o.position.z = Math.sin(ang) * u.radius;
+      o.position.y = u.baseY + Math.sin(t * u.bobSpeed + u.phase) * u.bobAmp;
+      o.rotation.y = t * 0.3;
+      o.children[1].material.opacity = 0.55 + Math.sin(t * 1.2 + u.phase) * 0.2;
+    });
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(tick);
+  }
+
+  if (reduced) {
+    renderer.render(scene, camera);
+  } else {
+    tick();
+  }
+})();
+</script>
+
+
+
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- helpers ---------- */
+  var $ = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  /* ---------- scroll progress / nav state / to-top ---------- */
+  var progress = $('#scroll-progress');
+  var toTop = $('#to-top');
+  var navbar = $('#navbar');
+  function onScroll(){
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? (window.scrollY / max) : 0;
+    progress.style.width = (p * 100) + '%';
+    navbar.classList.toggle('scrolled', window.scrollY > 8);
+    toTop.classList.toggle('show', window.scrollY > 600);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  /* ---------- CV download dropdown (EN / FR) ---------- */
+  function closeCvDrops(){
+    $$('.cv-drop.open').forEach(function (d) {
+      d.classList.remove('open');
+      var b = d.querySelector('[data-cv-drop]');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+  $$('[data-cv-drop]').forEach(function (btn) {
+    var drop = btn.closest('.cv-drop');
+    var menu = drop ? drop.querySelector('.cv-menu') : null;
+    if (!drop || !menu) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = drop.classList.contains('open');
+      closeCvDrops();
+      if (!open) {
+        drop.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+    menu.addEventListener('click', function (e) { e.stopPropagation(); });
+  });
+  document.addEventListener('click', closeCvDrops);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeCvDrops();
+  });
+
+  /* ---------- mobile nav ---------- */
+  var toggle = $('#nav-toggle');
+  var navLinks = $('#nav-links');
+  function setNav(open){
+    navLinks.classList.toggle('open', open);
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.toggle('locked', open);
+  }
+  toggle.addEventListener('click', function(){
+    setNav(!navLinks.classList.contains('open'));
+  });
+  $$('#nav-links a').forEach(function(a){
+    a.addEventListener('click', function(){ setNav(false); });
+  });
+
+  /* ---------- scrollspy ---------- */
+  var spyLinks = $$('.nav-links a');
+  var spyObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        spyLinks.forEach(function(a){
+          a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id);
+        });
+      }
+    });
+  }, {rootMargin:'-40% 0px -55% 0px'});
+  $$('section[id]').forEach(function(s){ spyObs.observe(s); });
+
+  /* ---------- scroll reveal ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, {threshold:0.12});
+  $$('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---------- year ---------- */
+  $('#year').textContent = String(new Date().getFullYear());
+
+  /* ---------- contact form (mailto fallback) ---------- */
+  var form = $('#contact-form');
+  var status = $('#form-status');
+  var t = function(k){ return window.__i18n ? window.__i18n.t(k) : ''; };
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.classList.remove('error');
+    var data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      subject: form.subject.value.trim(),
+      message: form.message.value.trim()
+    };
+    if(!data.name || !data.email || !data.message){
+      status.textContent = '→ ' + t('form.fill');
+      status.classList.add('error');
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){
+      status.textContent = '→ ' + t('form.email');
+      status.classList.add('error');
+      return;
+    }
+    var subject = encodeURIComponent(
+      (data.subject ? data.subject + ' ' : '') + 'Portfolio contact from ' + data.name
+    );
+    var body = encodeURIComponent(
+      'From: ' + data.name + ' <' + data.email + '>\n\n' + data.message +
+      '\n\nSent from berbersoft02-portfolio.vercel.app'
+    );
+    var ok = false;
+    try {
+      var w = window.open('mailto:Berbersoft@gmail.com?subject=' + subject + '&body=' + body, '_self');
+      ok = !!w;
+    } catch(err){}
+    if(ok){
+      status.textContent = '→ ' + t('form.ok');
+      form.reset();
+    } else {
+      status.textContent = '→ ' + t('form.blocked');
+      status.classList.add('error');
+    }
+  });
+})();
+</script>
+<!-- ===== Language selection modal ===== -->
+<div id="lang-modal" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
+  <div class="lang-modal-card">
+    <div class="lang-modal-eyebrow" data-i18n="modal.eyebrow">// welcome · bienvenue</div>
+    <div class="lang-modal-title" id="lang-modal-title" data-i18n="modal.title">Choose your language</div>
+    <div class="lang-modal-sub" data-i18n="modal.sub">Pick a language to continue</div>
+    <div class="lang-options">
+      <button type="button" class="lang-opt" data-lang="en">
+        <span class="flag" aria-hidden="true">🇬🇧</span>
+        <span class="name">English</span>
+        <span class="note" data-i18n="modal.en_note">Continue in English</span>
+      </button>
+      <button type="button" class="lang-opt" data-lang="fr">
+        <span class="flag" aria-hidden="true">🇫🇷</span>
+        <span class="name">Français</span>
+        <span class="note" data-i18n="modal.fr_note">Continue in French</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  'use strict';
+  var dict = {
+    en: {
+      "nav.profile": `Profile`,
+      "nav.skills": `Skills`,
+      "nav.projects": `Projects`,
+      "nav.education": `Education`,
+      "nav.languages": `Languages`,
+      "nav.contact": `Contact`,
+      "nav.cv": `CV`,
+      "hero.status": `Available · Embedded · Embedded AI · IoT`,
+      "hero.kicker": `master's · UMMTO`,
+      "hero.title": `<span style="font-weight: 800; color: var(--text); text-shadow: 0 0 40px rgba(154, 138, 251, 0.5);">Embedded Systems<br>Electronics</span><br>\n          <span class="gradient-text">Engineer</span> &amp; <span class="gradient-text">Innovator.</span>`,
+      "hero.sub": `Architecting embedded systems, on-device AI &amp; real-time IoT. Bare-metal microcontrollers firmware, computer vision, AI and mobile apps.`,
+      "hero.cta_contact": `Get in touch`,
+      "hero.cta_cv": `Download CV`,
+      "hero.cv_en": `English CV`,
+      "hero.cv_fr": `French CV`,
+      "hero.based": `Based in`,
+      "hero.loc": `Tizi Ouzou, Algeria`,
+      "hero.open": `Open to`,
+      "hero.mobility": `EU · Remote · Relocation`,
+      "hero.email": `Email`,
+      "hero.hint": `scroll to explore · drag the scene to rotate`,
+      "about.eyebrow": `About`,
+      "about.title": `Engineer by training, builder by nature.`,
+      "about.p1": `I hold a <strong>Master's degree in Integrated Systems Electronics</strong> from UMMTO, Algeria recognized at <strong>Level 7 of the European Qualifications Framework</strong> through an ENIC-NARIC certificate. My focus areas are <strong>embedded systems, embedded AI, and IoT</strong>.`,
+      "about.p2": `I've completed hands-on projects spanning microcontrollers, computer vision, native Android development, and machine learning for real-time sign language translation and physical system monitoring. I like work that touches both silicon and software the constraints make the design sharper.`,
+      "about.age_k": `Age`,
+      "about.loc_k": `Location`,
+      "about.loc_v": `Abizar Village, Tizi Ouzou`,
+      "about.email_k": `Email`,
+      "about.phone_k": `Phone`,
+      "about.status_k": `Status`,
+      "about.status_v": `Open to opportunities`,
+      "about.mob_k": `Mobility`,
+      "about.mob_v": `EU · Remote · Relocation`,
+      "skills.eyebrow": `Stack`,
+      "skills.title": `Technical toolkit`,
+      "skills.tag": `// four domains, one workflow`,
+      "skills.embedded": `Embedded &amp; Hardware`,
+      "s.chip.mcu": `Microcontrollers`,
+      "s.chip.sensors": `Sensors`,
+      "skills.ai": `AI &amp; Data`,
+      "s.chip.model": `Model design`,
+      "s.chip.training": `Training`,
+      "s.chip.opti": `Optimization`,
+      "s.chip.deploy": `Deployment`,
+      "s.chip.cv": `Computer Vision`,
+      "s.chip.rtinf": `Real-time inference`,
+      "skills.web": `Web &amp; Mobile`,
+      "s.chip.android": `Android (Kotlin/Java)`,
+      "skills.tools": `Tools &amp; Languages`,
+      "projects.eyebrow": `Projects`,
+      "projects.title": `Selected work`,
+      "projects.tag": `// real builds, real constraints`,
+      "p1.type": `Master's thesis`,
+      "p1.title": `Real-time Sign Language Translation`,
+      "p1.org": `UMMTO National "Innovative Project" label, score 19/20`,
+      "p1.d1": `Native Android app with an on-device AI model for real-time recognition of sign language gestures through the smartphone camera, with text output and speech synthesis.`,
+      "p1.d2": `Trained and optimized the model for live detection, tuning the latency / accuracy trade-off for practical use.`,
+      "p1.badge": `Innovative Project · Nov 2025`,
+      "p1.d3": `Covers the full pipeline: camera capture, keypoint extraction, on-device inference and bilingual text + speech output.`,
+      "p1.more": `Read more`,
+      "p1.m1": `gestures recognized`,
+      "p1.m2": `thesis score`,
+      "p1.m3": `live inference`,
+      "p2.d3": `Combines a low-power sensing node with closed-loop motor control - everything validated on real hardware, not just simulation.`,
+      "p2.more": `Read more`,
+      "p2.m1": `sensor accuracy`,
+      "p2.m2": `PWM control`,
+      "p2.m3": `speed error`,
+      "p2.type": `Bachelor's project`,
+      "p2.title": `Connected Weather Station &amp; Motor Speed Control`,
+      "p2.org": `UMMTO autonomous sensing + real-time control`,
+      "p2.d1": `Prototyped an autonomous weather station on <strong>ESP32 + DHT22</strong>, with a responsive web interface hosted on the microcontroller streaming real-time environmental data over Wi-Fi.`,
+      "p2.d2": `Modeled and implemented a servo control system on <strong>Arduino</strong> with a speed sensor and <strong>PWM controller</strong> to hold constant speed under varying loads.`,
+      "edu.eyebrow": `Education`,
+      "edu.title": `Academic path`,
+      "edu.master": `Master's Integrated Systems Electronics`,
+      "edu.univ": `Mouloud Mammeri University of Tizi Ouzou (UMMTO), Algeria`,
+      "edu.note": `ENIC-NARIC comparability certificate: <strong>Level 7 (Master)</strong> of the European Qualifications Framework, granting access to doctoral studies and the job market in the field. Master's project scored 19/20 and received the national "Innovative Project" label.`,
+      "edu.bachelor": `Bachelor's Electronics`,
+      "edu.bac": `Baccalaureate Mathematics`,
+      "edu.school": `Frère Aitbata Secondary School, Timizart`,
+      "info.eyebrow": `Languages &amp; mobility`,
+      "info.title": `Where I can work, and how I talk.`,
+      "info.languages": `Languages`,
+      "info.native": `Native`,
+      "info.proficient": `Proficient`,
+      "info.mobility": `Mobility`,
+      "info.mobility_desc": `Open to relocation across <strong>Europe</strong> France, Germany, Netherlands and other EU member states. Comfortable completing the necessary visa and residence permit procedures. Also open to <strong>fully remote</strong> roles.`,
+      "contact.eyebrow": `Contact`,
+      "contact.title": `Let's build something together.`,
+      "contact.left_title": `Open to embedded, embedded-AI and IoT roles.`,
+      "contact.left_desc": `Whether you have a position, a freelance project, or just want to talk shop about a microcontroller you can't bring to life drop a line. I usually reply within 24 hours.`,
+      "contact.email_label": `Email`,
+      "contact.phone_label": `Phone`,
+      "contact.web_label": `Web`,
+      "contact.loc_label": `Location`,
+      "contact.loc_val": `Abizar Village, Tizi Ouzou, Algeria`,
+      "contact.name_label": `Name`,
+      "contact.name_ph": `Your name`,
+      "contact.email_label2": `Email`,
+      "contact.email_ph": `you@company.com`,
+      "contact.subject_label": `Subject`,
+      "contact.subject_ph": `Embedded role / freelance / chat…`,
+      "contact.msg_label": `Message`,
+      "contact.msg_ph": `Tell me about the role or the build…`,
+      "contact.send": `Send message`,
+      "footer.credit": `designed &amp; built by S. Ahrikenchikh`,
+      "footer.loc": `Algeria · remote · EU`,
+      "modal.eyebrow": `// welcome · bienvenue`,
+      "modal.title": `Choose your language`,
+      "modal.sub": `Pick a language to continue`,
+      "modal.en_note": `Continue in English`,
+      "modal.fr_note": `Continue in French`,
+      "form.fill": `Please fill in name, email, and message.`,
+      "form.email": `That email looks off. Double-check it?`,
+      "form.ok": `Opening your email client… talk soon!`,
+      "form.blocked": `Email me directly at Berbersoft@gmail.com form handoff blocked.`
+    },
+    fr: {
+      "nav.profile": `Profil`,
+      "nav.skills": `Compétences`,
+      "nav.projects": `Projets`,
+      "nav.education": `Formation`,
+      "nav.languages": `Langues`,
+      "nav.contact": `Contact`,
+      "nav.cv": `CV`,
+      "hero.status": `Disponible · Embarqué · IA Embarquée · IoT`,
+      "hero.kicker": `master · UMMTO`,
+      "hero.title": `<span style="font-weight: 800; color: var(--text); text-shadow: 0 0 40px rgba(154, 138, 251, 0.5);">Systèmes Embarqués<br>Électronique</span><br>\n          <span class="accent">Ingénieur</span> &amp; <span class="grad">Innovateur.</span>`,
+      "hero.sub": `Conception de systèmes embarqués, IA sur appareil &amp; IoT temps réel. Firmware de microcontrôleurs bare-metal, vision par ordinateur, IA et applications mobiles.`,
+      "hero.cta_contact": `Prendre contact`,
+      "hero.cta_cv": `Télécharger CV`,
+      "hero.cv_en": `CV Anglais`,
+      "hero.cv_fr": `CV Français`,
+      "hero.based": `Basé à`,
+      "hero.loc": `Tizi Ouzou, Algérie`,
+      "hero.open": `Ouvert à`,
+      "hero.mobility": `UE · Télétravail · Relocalisation`,
+      "hero.email": `Email`,
+      "hero.hint": `faites défiler pour explorer · glissez la scène pour la faire pivoter`,
+      "about.eyebrow": `À propos`,
+      "about.title": `Ingénieur de formation, créateur de nature.`,
+      "about.p1": `Je suis titulaire d'un <strong>Master en Électronique des Systèmes Intégrés</strong> de l'UMMTO, Algérie reconnu au <strong>Niveau 7 du Cadre européen des certifications</strong> via un certificat ENIC-NARIC. Mes domaines de prédilection sont les <strong>systèmes embarqués, l'IA embarquée et l'IoT</strong>.`,
+      "about.p2": `J'ai mené des projets pratiques couvrant les microcontrôleurs, la vision par ordinateur, le développement Android natif et l'apprentissage automatique pour la traduction en temps réel du langage des signes et le suivi de systèmes physiques. J'aime le travail qui touche à la fois au silicium et au logiciel les contraintes rendent le design plus affûté.`,
+      "about.age_k": `Âge`,
+      "about.loc_k": `Localisation`,
+      "about.loc_v": `Village d'Abizar, Tizi Ouzou`,
+      "about.email_k": `Email`,
+      "about.phone_k": `Téléphone`,
+      "about.status_k": `Statut`,
+      "about.status_v": `Ouvert aux opportunités`,
+      "about.mob_k": `Mobilité`,
+      "about.mob_v": `UE · Télétravail · Relocalisation`,
+      "skills.eyebrow": `Pile technologique`,
+      "skills.title": `Boîte à outils technique`,
+      "skills.tag": `// quatre domaines, un flux de travail`,
+      "skills.embedded": `Embarqué &amp; Matériel`,
+      "s.chip.mcu": `Microcontrôleurs`,
+      "s.chip.sensors": `Capteurs`,
+      "skills.ai": `IA &amp; Données`,
+      "s.chip.model": `Conception de modèles`,
+      "s.chip.training": `Entraînement`,
+      "s.chip.opti": `Optimisation`,
+      "s.chip.deploy": `Déploiement`,
+      "s.chip.cv": `Vision par ordinateur`,
+      "s.chip.rtinf": `Inférence temps réel`,
+      "skills.web": `Web &amp; Mobile`,
+      "s.chip.android": `Android (Kotlin/Java)`,
+      "skills.tools": `Outils &amp; Langages`,
+      "projects.eyebrow": `Projets`,
+      "projects.title": `Travaux sélectionnés`,
+      "projects.tag": `// des vraies constructions, de vraies contraintes`,
+      "p1.type": `Mémoire de master`,
+      "p1.title": `Traduction en Temps Réel du Langage des Signes`,
+      "p1.org": `UMMTO Label national "Projet Innovant", score 19/20`,
+      "p1.d1": `Application Android native avec un modèle d'IA sur appareil pour la reconnaissance en temps réel des gestes du langage des signes via la caméra du smartphone, avec sortie textuelle et synthèse vocale.`,
+      "p1.d2": `Formation et optimisation du modèle pour la détection en direct, ajustement du compromis latence/précision pour une utilisation pratique.`,
+      "p1.badge": `Projet Innovant · Nov 2025`,
+      "p1.d3": `Couvre l'ensemble du pipeline : capture caméra, extraction de points clés, inférence sur appareil et sortie texte bilingue + synthèse vocale.`,
+      "p1.more": `Lire plus`,
+      "p1.m1": `gestes reconnus`,
+      "p1.m2": `score du mémoire`,
+      "p1.m3": `inférence en direct`,
+      "p2.d3": `Combine une station de capteurs basse consommation avec un contrôle moteur en boucle fermée - le tout validé sur du vrai matériel, pas seulement en simulation.`,
+      "p2.more": `Lire plus`,
+      "p2.m1": `précision capteur`,
+      "p2.m2": `contrôle PWM`,
+      "p2.m3": `erreur de vitesse`,
+      "p2.type": `Projet de licence`,
+      "p2.title": `Station Météorologique Connectée &amp; Contrôle de Vitesse Moteur`,
+      "p2.org": `UMMTO capteurs autonomes + contrôle temps réel`,
+      "p2.d1": `Prototype d'une station météorologique autonome sur <strong>ESP32 + DHT22</strong>, avec une interface web réactive hébergée sur le microcontrôleur diffusant en continu les données environnementales en temps réel via Wi-Fi.`,
+      "p2.d2": `Modélisation et implémentation d'un système de contrôle de servo sur <strong>Arduino</strong> avec capteur de vitesse et <strong>contrôleur PWM</strong> pour maintenir une vitesse constante sous des charges variables.`,
+      "edu.eyebrow": `Formation`,
+      "edu.title": `Parcours académique`,
+      "edu.master": `Master Électronique des Systèmes Intégrés`,
+      "edu.univ": `Université Mouloud Mammeri de Tizi Ouzou (UMMTO), Algérie`,
+      "edu.note": `Certificat de comparabilité ENIC-NARIC : <strong>Niveau 7 (Master)</strong> du Cadre européen des certifications, donnant accès aux études doctorales et au marché du travail dans le domaine. Le projet de master a obtenu 19/20 et a reçu le label national "Projet Innovant".`,
+      "edu.bachelor": `Licence Électronique`,
+      "edu.bac": `Baccalauréat Mathématiques`,
+      "edu.school": `Lycée Frère Aitbata, Timizart`,
+      "info.eyebrow": `Langues &amp; mobilité`,
+      "info.title": `Où je peux travailler et comment je parle.`,
+      "info.languages": `Langues`,
+      "info.native": `Natif`,
+      "info.proficient": `Compétent`,
+      "info.mobility": `Mobilité`,
+      "info.mobility_desc": `Ouvert à la relocalisation en <strong>Europe</strong> France, Allemagne, Pays-Bas et autres États membres de l'UE. À l'aise pour accomplir les procédures nécessaires de visa et de permis de résidence. Aussi ouvert aux rôles <strong>entièrement à distance</strong>.`,
+      "contact.eyebrow": `Contact`,
+      "contact.title": `Construisons quelque chose ensemble.`,
+      "contact.left_title": `Ouvert aux rôles embarqué, IA embarquée et IoT.`,
+      "contact.left_desc": `Que vous ayez un poste, un projet freelance, ou que vous vouliez simplement discuter d'un microcontrôleur que vous ne pouvez pas faire fonctionner envoyez-moi un message. Je réponds généralement dans les 24 heures.`,
+      "contact.email_label": `Email`,
+      "contact.phone_label": `Téléphone`,
+      "contact.web_label": `Web`,
+      "contact.loc_label": `Localisation`,
+      "contact.loc_val": `Village d'Abizar, Tizi Ouzou, Algérie`,
+      "contact.name_label": `Nom`,
+      "contact.name_ph": `Votre nom`,
+      "contact.email_label2": `Email`,
+      "contact.email_ph": `vous@entreprise.com`,
+      "contact.subject_label": `Sujet`,
+      "contact.subject_ph": `Rôle embarqué / freelance / discussion…`,
+      "contact.msg_label": `Message`,
+      "contact.msg_ph": `Parlez-moi du rôle ou du projet…`,
+      "contact.send": `Envoyer le message`,
+      "footer.credit": `conçu &amp; construit par S. Ahrikenchikh`,
+      "footer.loc": `Algérie · télétravail · UE`,
+      "modal.eyebrow": `// bienvenue · welcome`,
+      "modal.title": `Choisissez votre langue`,
+      "modal.sub": `Choisissez une langue pour continuer`,
+      "modal.en_note": `Continuer en anglais`,
+      "modal.fr_note": `Continuer en français`,
+      "form.fill": `Veuillez remplir le nom, l'email et le message.`,
+      "form.email": `Cet email semble incorrect. Vérifiez-le ?`,
+      "form.ok": `Ouverture de votre client email… à bientôt !`,
+      "form.blocked": `Envoyez-moi un email directement à Berbersoft@gmail.com transfert de formulaire bloqué.`
+    }
+  };
+
+  var current = 'en';
+
+  function applyLanguage(lang){
+    if(!dict[lang]) return;
+    current = lang;
+    try { localStorage.setItem('portfolio_lang', lang); } catch(e){}
+    document.documentElement.setAttribute('lang', lang);
+    var cur = document.getElementById('lang-current');
+    if(cur) cur.textContent = lang.toUpperCase();
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var t = dict[lang][key];
+      if(t === undefined || t === null) return;
+      if(el.hasAttribute('data-i18n-html')) el.innerHTML = t;
+      else el.textContent = t;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-ph');
+      var t = dict[lang][key];
+      if(t !== undefined) el.setAttribute('placeholder', t);
+    });
+  }
+
+  function t(key){ return (dict[current] && dict[current][key]) || ''; }
+
+  window.__i18n = { apply: applyLanguage, t: t, get: function(){ return current; } };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var saved = null;
+    try { saved = localStorage.getItem('portfolio_lang'); } catch(e){}
+    var modal = document.getElementById('lang-modal');
+
+    if(saved && dict[saved]){
+      applyLanguage(saved);
+    } else {
+      if(modal){
+        modal.classList.add('open');
+        var first = modal.querySelector('.lang-opt');
+        if(first) setTimeout(function(){ first.focus(); }, 80);
+      }
+    }
+
+    document.querySelectorAll('.lang-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        applyLanguage(btn.getAttribute('data-lang'));
+        if(modal) modal.classList.remove('open');
+      });
+    });
+
+    var sw = document.getElementById('lang-switcher-btn');
+    if(sw && modal){
+      sw.addEventListener('click', function(){
+        modal.classList.toggle('open');
+        if(modal.classList.contains('open')){
+          var first = modal.querySelector('.lang-opt');
+          if(first) first.focus();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal) modal.classList.remove('open');
+    });
+  });
+})();
+</script>
+
+<!-- ====== ASMR particle background vanilla JS port of 21st.dev "asmr-background" ====== -->
+<script>
+  (function () {
+    var canvas = document.getElementById('asmr-bg');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var width = 0;
+    var height = 0;
+    var particles = [];
+    var mouse = { x: -1000, y: -1000 };
+
+    var MAGNETIC_RADIUS = 280;
+    var VORTEX_STRENGTH = 0.07;
+    var PULL_STRENGTH = 0.12;
+
+    // 1000 particles on a 1920x1080 screen, scaled by area, floor 300 for small/mobile.
+    function targetCount() {
+      var area = window.innerWidth * window.innerHeight;
+      return Math.max(300, Math.min(1000, Math.round(area / 2100)));
+    }
+
+    function Particle() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.2;
+      this.vy = (Math.random() - 0.5) * 0.2;
+      this.size = Math.random() * 1.5 + 0.5;
+      // 70% charcoal dust, 30% glass shards
+      this.color = Math.random() > 0.7 ? '240, 245, 255' : '80, 80, 85';
+      this.alpha = Math.random() * 0.4 + 0.1;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.05;
+      this.frictionGlow = 0;
+    }
+
+    Particle.prototype.update = function () {
+      var dx = mouse.x - this.x;
+      var dy = mouse.y - this.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < MAGNETIC_RADIUS) {
+        var force = (MAGNETIC_RADIUS - dist) / MAGNETIC_RADIUS;
+
+        // Magnetic center pull
+        this.vx += (dx / dist) * force * PULL_STRENGTH;
+        this.vy += (dy / dist) * force * PULL_STRENGTH;
+
+        // Swirl vortex motion (perpendicular to radius)
+        this.vx += (dy / dist) * force * VORTEX_STRENGTH * 10;
+        this.vy -= (dx / dist) * force * VORTEX_STRENGTH * 10;
+
+        // Glow based on proximity and velocity
+        this.frictionGlow = force * 0.7;
+      } else {
+        this.frictionGlow *= 0.92;
+      }
+
+      // Physics application
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Friction / damping
+      this.vx *= 0.95;
+      this.vy *= 0.95;
+
+      // Background jitter (frozen static feel)
+      this.vx += (Math.random() - 0.5) * 0.04;
+      this.vy += (Math.random() - 0.5) * 0.04;
+
+      this.rotation += this.rotationSpeed + (Math.abs(this.vx) + Math.abs(this.vy)) * 0.05;
+
+      // Screen wrap
+      if (this.x < -20) this.x = width + 20;
+      if (this.x > width + 20) this.x = -20;
+      if (this.y < -20) this.y = height + 20;
+      if (this.y > height + 20) this.y = -20;
+    };
+
+    Particle.prototype.draw = function () {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+
+      var finalAlpha = Math.min(this.alpha + this.frictionGlow, 0.9);
+      ctx.fillStyle = 'rgba(' + this.color + ',' + finalAlpha + ')';
+
+      if (this.frictionGlow > 0.3) {
+        ctx.shadowBlur = 8 * this.frictionGlow;
+        ctx.shadowColor = 'rgba(180, 220, 255, ' + this.frictionGlow + ')';
+      }
+
+      // Sharp shard geometry
+      ctx.beginPath();
+      ctx.moveTo(0, -this.size * 2.5);
+      ctx.lineTo(this.size, 0);
+      ctx.lineTo(0, this.size * 2.5);
+      ctx.lineTo(-this.size, 0);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+    };
+
+    function init() {
+      width = canvas.clientWidth || window.innerWidth;
+      height = canvas.clientHeight || window.innerHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      particles = [];
+      var count = targetCount();
+      for (var i = 0; i < count; i++) particles.push(new Particle());
+    }
+
+    function render() {
+      // clearRect (instead of the original's translucent trail fill) keeps the
+      // existing 3D PCB scene visible behind the particles. Swap this for the
+      // trail fill if you want the original motion-blur look.
+      ctx.clearRect(0, 0, width, height);
+
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    function onMouseMove(e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    }
+
+    function onTouchMove(e) {
+      if (e.touches[0]) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }
+
+    window.addEventListener('resize', init);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+
+    init();
+    render();
+  })();
+</script>
+
+<!-- ====== Border-beam project cards vanilla JS port of 21st "border-beam-panel" ====== -->
+<script>
+  (function () {
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var PARKED = 40;
+    var cards = document.querySelectorAll('[data-border-beam]');
+    if (!cards.length) return;
+
+    var clamp = function (n, lo, hi) { return Math.min(hi, Math.max(lo, n)); };
+
+    // Hand-rolled delta-time spring angular VELOCITY is sprung, so the beams
+    // wind up and coast instead of snapping between speeds.
+    function Spring(v, k, d) {
+      this.x = v; this.v = 0; this.target = v; this.k = k; this.d = d;
+    }
+    Spring.prototype.step = function (dt) {
+      var a = this.k * (this.target - this.x) - this.d * this.v;
+      this.v += a * dt;
+      this.x += this.v * dt;
+      return this.x;
+    };
+
+    cards.forEach(function (card, i) {
+      // Deterministic start angle a distinct lap phase per card, never Math.random.
+      var startAngle = (((i + 1) * 137.508) % 360 + 360) % 360;
+      var speed = new Spring(42, 30, 11);
+      var angle = startAngle;
+      var idle = 42, hover = 240;
+      var onScreen = true;
+      var tabVisible = document.visibilityState !== 'hidden';
+      var running = false;
+      var raf = 0, last = 0;
+
+      function paint() {
+        card.style.setProperty('--mk-beam-a', ((angle % 360 + 360) % 360).toFixed(2) + 'deg');
+      }
+      function frame(now) {
+        if (!last) last = now;
+        var dt = clamp((now - last) / 1000, 0, 0.05);
+        last = now;
+        angle += speed.step(dt) * dt;
+        paint();
+        raf = requestAnimationFrame(frame);
+      }
+      function start() {
+        if (running) return;
+        running = true; last = 0;
+        raf = requestAnimationFrame(frame);
+      }
+      function stop() {
+        running = false;
+        if (raf) cancelAnimationFrame(raf);
+        raf = 0;
+      }
+      function sync() {
+        if (reduced) {
+          stop();
+          angle = PARKED;
+          speed.x = speed.target = idle;
+          speed.v = 0;
+          paint();
+        } else if (tabVisible && onScreen) {
+          start();
+        } else {
+          stop();
+        }
+      }
+
+      document.addEventListener('visibilitychange', function () {
+        tabVisible = document.visibilityState !== 'hidden';
+        sync();
+      });
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          onScreen = entries.some(function (e) { return e.isIntersecting; });
+          sync();
+        }, { threshold: 0.05 });
+        io.observe(card);
+      }
+
+      card.addEventListener('pointerenter', function () { speed.target = hover; });
+      card.addEventListener('pointerleave', function () { speed.target = idle; });
+      card.addEventListener('focusin', function () { speed.target = hover; });
+      card.addEventListener('focusout', function () { speed.target = idle; });
+
+      sync();
+    });
+  })();
+</script>
+
+<!-- ====== Random letter-swap nav links vanilla port of 21st "m-random-letter-swap-1" ====== -->
+<script>
+  (function () {
+    var DECOY_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%&@*+?=';
+    var DECOYS = 3; // decoy letters stacked above the target in each column
+
+    function randChar() {
+      return DECOY_CHARS[Math.floor(Math.random() * DECOY_CHARS.length)];
+    }
+
+    // Each letter becomes a vertical column: [target, decoys..., target].
+    // At rest the top (target) shows; on hover the column slides down through
+    // the decoys and back to the target a glitchy slot-machine swap.
+    function build(link) {
+      if (link.querySelector('.rls-box')) return; // already letter-swapped
+      var text = link.textContent;
+      var frag = document.createDocumentFragment();
+      var idx = 0;
+      for (var i = 0; i < text.length; i++) {
+        var ch = text.charAt(i);
+        if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); idx++; continue; }
+        var box = document.createElement('span');
+        box.className = 'rls-box';
+        box.setAttribute('data-ch', ch);
+        box.style.setProperty('--i', idx);
+        box.style.setProperty('--stack', DECOYS + 1);
+        var stack = document.createElement('span');
+        stack.className = 'rls-stack';
+        var top = document.createElement('span');
+        top.className = 'rls-it';
+        top.textContent = ch;
+        stack.appendChild(top);
+        for (var d = 0; d < DECOYS; d++) {
+          var dec = document.createElement('span');
+          dec.className = 'rls-it';
+          dec.setAttribute('aria-hidden', 'true');
+          dec.textContent = randChar();
+          stack.appendChild(dec);
+        }
+        var bottom = document.createElement('span');
+        bottom.className = 'rls-it';
+        bottom.textContent = ch;
+        stack.appendChild(bottom);
+        box.appendChild(stack);
+        frag.appendChild(box);
+        idx++;
+      }
+      link.textContent = '';
+      link.appendChild(frag);
+    }
+
+    function init() {
+      document.querySelectorAll('#nav-links a').forEach(build);
+    }
+
+    // The i18n engine rewrites link textContent on language switch (EN/FR),
+    // which wipes the letter spans rebuild after every mutation. We disconnect
+    // during our own rebuild so it can't loop.
+    var navList = document.getElementById('nav-links');
+    if (navList && 'MutationObserver' in window) {
+      var mo = new MutationObserver(function () {
+        mo.disconnect();
+        init();
+        mo.observe(navList, { childList: true, subtree: true, characterData: true });
+      });
+      mo.observe(navList, { childList: true, subtree: true, characterData: true });
+    }
+
+    init();
+  })();
+</script>
+
+<!-- ====== Glare Card effect (Aceternity / Linear style) ====== -->
+<script>
+  (function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cards = document.querySelectorAll('.skill-card');
+    cards.forEach(function (card) {
+      var glare = document.createElement('div');
+      glare.className = 'glare';
+      card.insertBefore(glare, card.firstChild);
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--gx', x + '%');
+        card.style.setProperty('--gy', y + '%');
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.setProperty('--gx', '50%');
+        card.style.setProperty('--gy', '50%');
+      });
+    });
+  })();
+</script>
+
+<script>
+  // Scroll-triggered fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in-up').forEach(el => fadeObserver.observe(el));
+</script>
+
+<a href="#contact" class="contact-cta" id="contactCta">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  Let's talk
+</a>
+
+<script>
+  // Show contact CTA after scrolling past hero
+  const contactCta = document.getElementById('contactCta');
+  const heroSection = document.getElementById('hero');
+  if (contactCta && heroSection) {
+    window.addEventListener('scroll', () => {
+      const pastHero = window.scrollY > heroSection.offsetHeight;
+      contactCta.classList.toggle('show', pastHero);
+    }, { passive: true });
+  }
+</script>
+
+</body>
+</html>
