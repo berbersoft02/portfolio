@@ -1928,11 +1928,13 @@ section { transition: opacity 0.3s ease-in-out; }
         <div class="chips">
           <span class="chip" data-i18n="s.chip.model">Model design</span>
           <span class="chip">TensorFlow</span>
+          <span class="chip">MediaPipe</span>
           <span class="chip" data-i18n="s.chip.training">Training</span>
           <span class="chip" data-i18n="s.chip.opti">Optimization</span>
-          <span class="chip" data-i18n="s.chip.deploy">Deployment</span>
+          <span class="chip" data-i18n="s.chip.deploy">On-device ML</span>
           <span class="chip" data-i18n="s.chip.cv">Computer Vision</span>
           <span class="chip" data-i18n="s.chip.rtinf">Real-time inference</span>
+          <span class="chip">Gesture Recognition</span>
         </div>
       </div>
 
@@ -1947,6 +1949,10 @@ section { transition: opacity 0.3s ease-in-out; }
           <span class="chip">TypeScript</span>
           <span class="chip">Tailwind CSS</span>
           <span class="chip" data-i18n="s.chip.android">Android (Kotlin/Java)</span>
+          <span class="chip">Jetpack Compose</span>
+          <span class="chip">CameraX</span>
+          <span class="chip">Material Design 3</span>
+          <span class="chip">MVVM Architecture</span>
         </div>
       </div>
 
@@ -1996,16 +2002,17 @@ section { transition: opacity 0.3s ease-in-out; }
             <span>·</span>
             <span data-i18n="p1.type">Master's thesis</span>
           </div>
-          <h3 class="project-title" data-i18n="p1.title">Real-time Sign Language Translation</h3>
+          <h3 class="project-title" data-i18n="p1.title">Algerian Sign Language Translator (Bidirectional)</h3>
           <div class="project-org" data-i18n="p1.org">UMMTO National "Innovative Project" label, score 19/20</div>
           <ul class="project-desc">
-            <li data-i18n="p1.d1">Native Android app with an on-device AI model for real-time recognition of sign language gestures through the smartphone camera, with text output and speech synthesis.</li>
-            <li data-i18n="p1.d2">Trained and optimized the model for live detection, tuning the latency / accuracy trade-off for practical use.</li>
+            <li data-i18n="p1.d1">Bidirectional Android application bridging communication between sign language users and non-signers through real-time translation using smartphone camera and MediaPipe Gesture Recognizer.</li>
+            <li data-i18n="p1.d2">Implements both Sign-to-Text (camera-based gesture recognition with TTS) and Text/Voice-to-Sign (visual sign language animations) with multilingual support for French, English, and Kabyle (Berber).</li>
           </ul>
           <details class="project-more-wrap">
             <summary data-i18n="p1.more">Read more</summary>
             <ul class="project-desc">
-              <li data-i18n="p1.d3">Covers the full pipeline: camera capture, keypoint extraction, on-device inference and bilingual text + speech output.</li>
+              <li data-i18n="p1.d3">Built with Kotlin and Jetpack Compose following MVVM architecture. Comprehensive sign library including alphabet, numbers (0-100+), phrases, days, and vocabulary with interactive learning mode and real-time feedback.</li>
+              <li data-i18n="p1.d4">Optimized on-device ML inference pipeline with CameraX integration for live gesture tracking, achieving sub-200ms latency on Android 8.0+ devices.</li>
             </ul>
           </details>
           <div class="project-icons" aria-label="Tech stack">
